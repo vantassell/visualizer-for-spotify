@@ -4,14 +4,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 // We import all the components we need in our app
-import Navbar from "./components/navbar";
-import SimpleHome from "./components/basicPlayer";
 import LogIn from "./components/login";
 import { useCookies } from "react-cookie";
 import BasicPlayer from "./components/basicPlayer";
-
-// const [accountToken, setAccountToken] = useState(undefined);
-// const [refreshToken, setRefreshToken] = useState(undefined);
 
 const getHashParams = () => {
   const hashParams = {};
@@ -29,29 +24,32 @@ const getHashParams = () => {
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["name"]);
 
-  // const params = getHashParams();
   const { accessToken, refreshToken, expiresAt, email, displayName } =
     getHashParams();
 
-  if (accessToken) {
+  if (accessToken && !cookies.accessToken) {
     setCookie("accessToken", accessToken, { path: "/" });
     console.log(`set accessToken: ${accessToken}`);
   }
-  if (refreshToken) {
+  if (refreshToken && !cookies.refreshToken) {
     setCookie("refreshToken", refreshToken, { path: "/" });
     console.log(`set refreshToken: ${refreshToken}`);
   }
-  if (expiresAt) {
+  if (expiresAt && !cookies.expiresAt) {
     setCookie("expiresAt", expiresAt, { path: "/" });
     console.log(`set expiresAt: ${expiresAt}`);
   }
-  if (email) {
+  if (email && !cookies.email) {
     setCookie("email", email, { path: "/" });
     console.log(`set email: ${email}`);
   }
-  if (displayName) {
+  if (displayName && !cookies.displayName) {
     setCookie("displayName", displayName, { path: "/" });
     console.log(`set displayName: ${displayName}`);
+  }
+
+  if (accessToken || refreshToken || expiresAt || email || displayName) {
+    window.location.replace("http://localhost:3000");
   }
 
   return (
@@ -60,7 +58,7 @@ const App = () => {
         <Route
           exact
           path="/"
-          element={!accessToken ? <LogIn /> : <BasicPlayer />}
+          element={!cookies.accessToken ? <LogIn /> : <BasicPlayer />}
         />
         {/*<Route path="/player" element={<BasicPlayer />} />*/}
         {/*<Route exact path="/" element={<RecordList />} />*/}

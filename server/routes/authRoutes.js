@@ -58,7 +58,7 @@ router.get("/logged", async (req, res) => {
   })
     .then((response) => response.json())
     .then(async (data) => {
-      console.log("posting to spotify");
+      console.log("posting to spotify for initial token");
 
       const accessToken = data.access_token || "error getting token on server";
       const refreshToken =
@@ -91,6 +91,7 @@ router.get("/logged", async (req, res) => {
         displayName,
       };
 
+      console.log("redirecting to client");
       const query = querystring.stringify(accountInfo);
       res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
     });

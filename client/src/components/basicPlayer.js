@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import styles from "./player.module.css";
+import { useInterval } from "./../hooks/useInterval";
+import queryString from "query-string";
 
 export default function BasicPlayer() {
   const [trackInfo, setTrackInfo] = useState({
-    title: "errorTitle",
-    artist: "errorArtist",
-    album: "errorAlbum",
+    title: "No Title",
+    artist: "No Artist",
+    album: "No Album... check to see if spotify is playing ;)",
   });
 
-  const [artworkURL, setArtworkURL] = useState({
-    artworkURL:
-      "https://m.media-amazon.com/images/I/61oQn7nDDmL._AC_UF894,1000_QL80_.jpg",
-  });
+  const [artworkURL, setArtworkURL] = useState(undefined);
+
+  const initialPollingInterval = 1000;
+  const [pollingInterval, setPollingInterval] = useState(
+    initialPollingInterval
+  );
 
   const [cookies, setCookie] = useCookies([
     "accessToken",
@@ -43,28 +47,96 @@ export default function BasicPlayer() {
     </div>
   );
 
-  useEffect(() => {
-    async function getCurrentSong() {
-      const response = await fetch(
-        `http://localhost:8888/players/${cookies.accessToken}`
-      );
+  async function getCurrentSong() {
+    const params = {
+      accessToken: cookies.accessToken,
+      refreshToken: cookies.refreshToken,
+    };
 
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
+    const queryParams = queryString.stringify(params);
+    const playersQueryURL = `http://localhost:8888/players?${queryParams}`;
+    // console.log(playersQueryURL);
+    const response = await fetch(playersQueryURL).catch((err) => {
+      console.log(`ERROR in getCurrentSong, failed fetch !!!`);
+      console.log(err);
+    });
 
-      // const data = await response.json();
-      const { title, artist, album, artworkURL } = await response.json();
-      setTrackInfo({ title, artist, album });
-      setArtworkURL(artworkURL);
-      console.log("ran useEffect");
-      // console.log(JSON.stringify(trackInfo));
+    // console.log("right before killing");
+    if (!response) {
+      // console.log("killing getCurrent call");
+      setPollingInterval(pollingInterval * 2);
+      return;
+    }
+    // console.log("right after killing");
+
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      console.log(`no response from server, tell AVT!\t${message}`);
+      return;
     }
 
+    const {
+      title,
+      artist,
+      album,
+      artworkURL,
+      backOff,
+      newAccessToken,
+      newExpiresAt,
+    } = await response.json();
+
+    // check for backoff from Spotify (could be 429, or another error)
+    if (backOff) {
+      increasePollingInterval();
+    } else {
+      decreasePollingInterval();
+    }
+
+    if (newAccessToken) {
+      setCookie("accessToken", newAccessToken, { path: "/" });
+      console.log("reset Access Token");
+    }
+
+    if (newExpiresAt) {
+      setCookie("expiresAt", newExpiresAt, { path: "/" });
+      console.log("reset Expires At");
+    }
+
+    if (
+      title !== trackInfo.title ||
+      artist !== trackInfo.artist ||
+      album !== trackInfo.album
+    ) {
+      setTrackInfo({ title, artist, album });
+      setArtworkURL(artworkURL);
+      console.log(
+        `new track found! updating state ${JSON.stringify(trackInfo)}`
+      );
+    } else {
+      // console.log(`no new track found`);
+    }
+
+    // console.log(JSON.stringify(trackInfo));
+  }
+
+  useEffect(() => {
+    console.log("ran useEffect");
     getCurrentSong();
   }, []);
+
+  useInterval(async () => {
+    getCurrentSong();
+  }, pollingInterval);
+
+  function increasePollingInterval() {
+    setPollingInterval(pollingInterval * 2);
+  }
+
+  function decreasePollingInterval() {
+    if (pollingInterval > initialPollingInterval) {
+      setPollingInterval(initialPollingInterval);
+    }
+  }
 
   // This following section will display the form that takes the input from the user.
   return (
@@ -75,7 +147,7 @@ export default function BasicPlayer() {
           artist={trackInfo.artist}
           album={trackInfo.album}
         />
-        <Artwork artworkURL={artworkURL} />
+        {artworkURL && <Artwork artworkURL={artworkURL} />}
       </div>
     </main>
   );
