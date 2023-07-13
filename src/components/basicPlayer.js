@@ -54,7 +54,8 @@ export default function BasicPlayer() {
     };
 
     const queryParams = queryString.stringify(params);
-    const playersQueryURL = `http://localhost:8888/players?${queryParams}`;
+    // const playersQueryURL = `http://localhost:8888/players?${queryParams}`;
+    const playersQueryURL = `${process.env.REACT_APP_SERVER_DOMAIN}/players?${queryParams}`;
     // console.log(playersQueryURL);
     const response = await fetch(playersQueryURL).catch((err) => {
       console.log(`ERROR in getCurrentSong, failed fetch !!!`);

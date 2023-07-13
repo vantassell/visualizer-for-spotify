@@ -20,9 +20,14 @@ export default function Login() {
   //   getData();
   // }, []);
 
+  const test = "fuckmylife";
   return (
     <div>
-      <a href="http://localhost:8888/api/login">Sign in w/ Spotify</a>
+      {/*<a href="http://localhost:8888/api/login">Sign in w/ Spotify</a>*/}
+      {/*<a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">*/}
+      <a href={`${process.env.REACT_APP_SERVER_DOMAIN}/api/login`}>
+        Sign in w/ Spotify
+      </a>
     </div>
   );
 }
