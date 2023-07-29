@@ -1,3 +1,15 @@
+# Demo Link #
+Demo this webapp via the below link 🥳
+
+https://vantassell.github.io/spotify-visualizer-webapp
+
+## API for this Project ##
+This webapp depends on an API that I wrote and host on Heroku, checkout the repo below :)
+
+https://github.com/vantassell/spotify-visualizer-api
+
+# Random notes for this project #
+
 ## WebOS ##
 
 ### Good page for docs ###
@@ -58,6 +70,10 @@ Add these env variables.
 
 `NPM_CONFIG_PRODUCTION=false`
 `YARN_PRODUCTION=false`
+
+### Check logs from terminal for current deployment ### 
+`heroku logs --tail`
+
 
 # Running Webpack #
 `index.html` imports a `bundle.js` that lives in the `dist` folder that Webpack creates. Run the below to update `bundle.js` with anything from **npm**.
