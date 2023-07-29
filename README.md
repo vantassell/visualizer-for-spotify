@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+## WebOS ##
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Good page for docs ###
+https://webostv.developer.lge.com/develop/tools/cli-dev-guide#ares-generate
 
-## Available Scripts
+### Generate Hosted WebApp ###
 
-In the project directory, you can run:
+`ares-generate --list`
+Tells you all the options
 
-### `npm start`
+`ares-generate -t hosted_webapp ./SpotifyViz`
+Points to an external site, webapp is effectively a container for a url pointing to your app.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The above creates an `index.html` file that you'll update with the webapp's url
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Package ####
+For development (and debugging) run `ares-package --no-minify ./SpotifyViz`
 
-### `npm test`
+For production, use `ares-package ./SpotifyViz`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Deploy to local LG WEBOS ###
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Get list of tv devices ####
+Find out the name of your device
+`ares-setup-device --list`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Install onto device ####
+`ares-install --device avt-lg ./com.domain.app_0.0.1_all.ipk`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### Remove from device ####
+`ares-install --device avt-lg --remove com.domain.app`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Launch #####
+`ares-launch --device avt-lg com.domain.app`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Debug (aka inspect) ####
+Launch the app, then run `ares-inspect --device avt-lg --app com.domain.app --open`
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Close ####
+`ares-launch --device avt-lg --close com.domain.app`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### All In One ###
+`ares-package --no-minify ./spotifyviz && ares-install --device avt-lg ./com.domain.app_0.0.3_all.ipk && ares-inspect --device avt-lg --app com.domain.app --open`
 
-### Code Splitting
+### Simulator Commands ###
+No need to build, you can install the folder directly
+`ares-launch -s 23 ./spotifyviz`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Heroku Settings ##
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Add these env variables.
 
-### Making a Progressive Web App
+`NPM_CONFIG_PRODUCTION=false`
+`YARN_PRODUCTION=false`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Running Webpack #
+`index.html` imports a `bundle.js` that lives in the `dist` folder that Webpack creates. Run the below to update `bundle.js` with anything from **npm**.
 
-### Advanced Configuration
+`npm run build`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+# Encoding background video #
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+source: https://pixelpoint.io/blog/web-optimized-video-ffmpeg/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+First Try
+`ffmpeg -i input.mov -c:v libx265 -crf 32 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an output.mp4`
+
+Using rain.mp4 setting for universality
+`ffmpeg -i star_loop.webm -c:v libx264 -pix_fmt yuv420p -movflags +faststart star_loop.mp4`
+
+Add loop during encoding
+`stream_loop 10` --> 10x loops
+NOTE: `stream_loop` must come before `-i`
