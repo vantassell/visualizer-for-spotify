@@ -1,14 +1,18 @@
-# Demo Link #
-Demo this webapp via the below link 🥳
+# What is a Spotify Visualizer? #
+Spotify-Visualizer is a website that shows what your spotify is currently playing.
 
-https://vantassell.github.io/spotify-visualizer-webapp
+_NOTE: This visualizer doesn't play sound, just video (sorry, it can't happen until spotify updates their SDK)._
 
-## API for this Project ##
-This webapp depends on an API that I wrote and host on Heroku, checkout the repo below :)
+In this repo, you'll find a webapp that communicates with an API that I also wrote ---> [Link to API repo](https://github.com/vantassell/spotify-visualizer-api)
 
-https://github.com/vantassell/spotify-visualizer-api
+<br>
 
-# Random notes for this project #
+✨ Check it out ---> [Link to Live Demo](https://vantassell.github.io/spotify-visualizer-webapp)
+
+<br>
+
+<br><br>
+# Notes for building + deploying #
 
 ## WebOS ##
 

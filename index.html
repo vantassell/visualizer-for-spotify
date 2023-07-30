@@ -1,29 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
     <title>Spotify Visualizer</title>
-    <!--    <script src="./queryCheck.js"/>-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"/>
+
+    <!--    put all of my global magic numbers here    -->
+    <script>
+        const INITIAL_POLLING_INTERVAL = 1000;
+        const API_PLAYERS_URL = "https://avt-sv-api-16ae49589f38.herokuapp.com/players";
+        const LOGGING_LEVEL = 1; // 1 - minimal, 2 - verbose
+    </script>
 </head>
 <body>
-
 <video autoplay muted loop class="video-player">
-    <source src="star_loop_10x.mp4" type="video/webm">
+    <source src="star_loop_10x.mp4" type="video/webm"/>
 </video>
 
 <div class="sign-in">
-    <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">Sign into <span
-            class="sign-in__spotify">Spotify</span></a>
+    <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
+        Sign into <span class="sign-in__spotify">Spotify</span></a>
 </div>
 
 <div class="trackInfoContainer">
     <div class="trackInfo"></div>
 </div>
-<div class="artworkContainer">
-</div>
+<div class="artworkContainer"></div>
 
 <!-- grab all the code from npm that we've packed into bundle.js-->
 <script src="dist/bundle.js"></script>
-
 </body>
 </html>

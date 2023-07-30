@@ -56,11 +56,13 @@ export function queryParamsIntoCookies() {
       path: "/",
     });
   }
-  // console.log(`accessToken: ${Cookies.get("accessToken")}`);
-  // console.log(`refreshToken: ${Cookies.get("refreshToken")}`);
-  // console.log(`expiresAt: ${Cookies.get("expiresAt")}`);
-  // console.log(`email: ${Cookies.get("email")}`);
-  // console.log(`displayName: ${Cookies.get("displayName")}`);
 
-  console.log("exiting queryParamsIntoCookies");
+  if (LOGGING_LEVEL === 2) {
+    console.log(`accessToken: ${Cookies.get("accessToken")}`);
+    console.log(`refreshToken: ${Cookies.get("refreshToken")}`);
+    console.log(`expiresAt: ${Cookies.get("expiresAt")}`);
+    console.log(`email: ${Cookies.get("email")}`);
+    console.log(`displayName: ${Cookies.get("displayName")}`);
+    console.log("exiting queryParamsIntoCookies");
+  }
 }
