@@ -13,6 +13,8 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     /*align-content: space-between;*/
+    font-weight: bold;
+    font-family: Tahoma, sans-serif;
 }
 
 .sign-in {
@@ -89,7 +91,7 @@ body {
     /* Simple White Text color */
     color: white;
     text-shadow: black -1px 1px 5px;
-
+    font-weight: normal;
     /*
           Dynamic Inverted Text color
       */
@@ -99,16 +101,31 @@ body {
     /*filter: invert(1) grayscale(1) contrast(8);*/
 }
 
+.sign-out {
+    text-align: end;
+    padding: 0 0 0 3.4rem;
+    margin: auto auto -1rem auto;
+    color: white;
+    filter: opacity(0.3);
+    text-shadow: black -1px 1px 5px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Tahoma, sans-serif;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+
+}
+
 .spotifyLogoContainer {
     height: 100%;
     z-index: 20;
     object-fit: contain;
-    max-width: 15%;
-    min-width: 300px;
-    /*flex-shrink: 20;*/
+    width: 300px;
     overflow: hidden;
     padding-right: 2rem;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
@@ -118,9 +135,7 @@ body {
     width: 100%;
     object-fit: scale-down;
     overflow: hidden;
-    /*padding-right: 2em;*/
-    /*padding-top: 3em;*/
-    filter: opacity(0.5);
+    /*filter: opacity(0.5);*/
 }
 
 .artworkContainer {

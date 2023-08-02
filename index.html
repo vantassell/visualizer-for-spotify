@@ -8,12 +8,13 @@
     <script>
         const INITIAL_POLLING_INTERVAL = 1000;
         const API_PLAYERS_URL = "https://avt-sv-api-16ae49589f38.herokuapp.com/players";
-        const LOGGING_LEVEL = 1; // 1 - minimal, 2 - verbose
+        const LOGGING_LEVEL = 2; // 1 - minimal, 2 - verbose
     </script>
 </head>
 <body>
-<video autoplay muted loop class="video-player">
-    <source src="star_loop_10x.mp4" type="video/webm"/>
+<video autoplay muted loop playsinline preload="auto" class="video-player">
+<!--    <source src="star_loop_10x.mp4" type="video/webm"/>-->
+    <source src="star_loop.mp4" type="video/webm"/>
 </video>
 
 <div class="sign-in">
@@ -26,6 +27,7 @@
         <div class="trackInfo"></div>
     </div>
     <div class="spotifyLogoContainer">
+        <button class="sign-out" id="sign-out">Sign Out of</button>
 <!--            <img class="spotifyLogo" src="assets/spotify/Spotify_Logo_CMYK_Green.png" alt="spotify logo">-->
         <img class="spotifyLogo" src="assets/spotify/Spotify_Logo_RGB_Green.png" alt="spotify logo">
     </div>

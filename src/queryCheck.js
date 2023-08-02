@@ -1,4 +1,4 @@
-import Cookies from "jscookie";
+import Cookies from "js-cookie";
 
 export function queryParamsIntoCookies() {
   const queryString = window.location.search;
@@ -13,48 +13,28 @@ export function queryParamsIntoCookies() {
   const displayName = urlParams.get("displayName");
 
   if (accessToken) {
-    // console.log("trying to set accessToken cookie");
-    Cookies.set({
-      name: "accessToken",
-      value: accessToken,
-      path: "/",
-    });
+    console.log("trying to set accessToken cookie");
+    Cookies.set(`accessToken`, accessToken);
   }
 
   if (refreshToken) {
-    // console.log("trying to set refreshToken cookie");
-    Cookies.set({
-      name: "refreshToken",
-      value: refreshToken,
-      path: "/",
-    });
+    console.log("trying to set refreshToken cookie");
+    Cookies.set("refreshToken", refreshToken);
   }
 
   if (expiresAt) {
-    // console.log("trying to set expiresAt cookie");
-    Cookies.set({
-      name: "expiresAt",
-      value: expiresAt,
-      path: "/",
-    });
+    console.log("trying to set expiresAt cookie");
+    Cookies.set("expiresAt", expiresAt);
   }
 
   if (email) {
-    // console.log("trying to set email cookie");
-    Cookies.set({
-      name: "email",
-      value: email,
-      path: "/",
-    });
+    Cookies.set("email", email);
+    console.log("trying to set email cookie");
   }
 
   if (displayName) {
-    // console.log("trying to set displayName cookie");
-    Cookies.set({
-      name: "displayName",
-      value: displayName,
-      path: "/",
-    });
+    console.log("trying to set displayName cookie");
+    Cookies.set("displayName", displayName);
   }
 
   if (LOGGING_LEVEL === 2) {
