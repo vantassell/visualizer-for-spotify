@@ -115,7 +115,6 @@ body {
     cursor: pointer;
     background: transparent;
     border: none;
-
 }
 
 .spotifyLogoContainer {
@@ -123,6 +122,7 @@ body {
     z-index: 20;
     object-fit: contain;
     width: 300px;
+    min-height: 183px;
     overflow: hidden;
     padding-right: 2rem;
     display: flex;

@@ -106,6 +106,7 @@ Revised encoding as of 8.1.23
 `ffmpeg -i 200922_LoopStars.mov -c:v libvpx-vp9 -crf 28 -vf scale=3840:-2 -pix_fmt yuv420p -deadline best -an output_420_10x.webm`
 
 TODO: Consider doing two-pass compression on the webm. I don't know what bitrate, but pick something around 2k (??)
+`ffmpeg -i 200922_LoopStars.mov -c:v libvpx-vp9 -b:v 0 -crf 20 -vf scale=3840:-2 -pix_fmt yuv420p -deadline best -an -f null /dev/null && \ ffmpeg -i 200922_LoopStars.mov -c:v libvpx-vp9 -crf 20 -pix_fmt yuv420p -deadline best -pass 2 -an output_420.webm`
 
 ## ffmpeg docs for vp9 encoding ##
 `https://trac.ffmpeg.org/wiki/Encode/VP9`

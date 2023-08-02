@@ -65,20 +65,14 @@ export async function getCurrentTrackFromSpotify() {
 
   // check if we got a new accessToken
   if (newAccessToken) {
-    Cookies.set({
-      name: "accessToken",
-      value: newAccessToken,
-      path: "/",
-    });
+    Cookies.remove("accessToken");
+    Cookies.set("accessToken", newAccessToken);
     console.log(`updated accessToken to: ${newAccessToken}`);
   }
 
   if (newExpiresAt) {
-    Cookies.set({
-      name: "expiresAt",
-      value: newExpiresAt,
-      path: "/",
-    });
+    Cookies.remove("expiresAt");
+    Cookies.set("expiresAt", newExpiresAt);
     console.log(`updated expiredAt to: ${newExpiresAt}`);
   }
 
