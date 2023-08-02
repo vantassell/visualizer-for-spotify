@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { clearCookiesAndResetPath } from "./signOut";
+import { clearCookiesAndResetPath } from "./queryCheck.js";
 
 let pollingInterval = INITIAL_POLLING_INTERVAL;
 let continuePolling = false;

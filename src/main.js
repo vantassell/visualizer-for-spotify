@@ -12,15 +12,11 @@ const signIn = document.querySelector(".sign-in");
 const spotifyLogoContainer = document.querySelector(".spotifyLogoContainer");
 const signOut = document.getElementById("sign-out");
 
-document.querySelector(".video-player").addEventListener(
-  "ended",
-  function (e) {
-    e.target.currentTime = 0;
-    e.target.play();
-    console.log("loop");
-  },
-  false
-);
+
+// if (navigator.serviceWorker) {
+//   console.log("supports service workers!");
+// }
+// TODO: display video poster until video has been saved locally--> Then start the loop
 
 // check if they're signed in
 if (accessToken) {

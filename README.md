@@ -99,3 +99,13 @@ Using rain.mp4 setting for universality
 Add loop during encoding
 `stream_loop 10` --> 10x loops
 NOTE: `stream_loop` must come before `-i`
+
+Revised encoding as of 8.1.23
+`ffmpeg -stream_loop 10 -i 200922_LoopStars.mov -c:v libx265 -crf 28 -vf scale=3940:-2 -preset veryslow -tag:v hvc1 -pix_fmt yuv420p -movflags faststart -an output3.mp4`
+
+`ffmpeg -i 200922_LoopStars.mov -c:v libvpx-vp9 -crf 28 -vf scale=3840:-2 -pix_fmt yuv420p -deadline best -an output_420_10x.webm`
+
+TODO: Consider doing two-pass compression on the webm. I don't know what bitrate, but pick something around 2k (??)
+
+## ffmpeg docs for vp9 encoding ##
+`https://trac.ffmpeg.org/wiki/Encode/VP9`
