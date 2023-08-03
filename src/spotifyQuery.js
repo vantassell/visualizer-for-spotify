@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { clearCookiesAndResetPath } from "./queryCheck.js";
+import { clearCookiesAndResetPath } from "./signOut.js";
 
 let pollingInterval = INITIAL_POLLING_INTERVAL;
 let continuePolling = false;
@@ -100,6 +100,12 @@ export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
          alt="album art"
      />
   `;
+  console.log("done updating Track Info");
+}
+
+function removeTrackInfo() {
+  document.querySelector(".trackInfo").innerHTML = ``;
+  document.querySelector(".artworkContainer").innerHTML = ``;
 }
 
 export function beginSpotifyPolling() {
@@ -133,25 +139,17 @@ function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
   }, pollingInterval);
 }
 
-export function stopPollingAndSignOut() {
+
+function stopPolling() {
   if (timeoutID) {
     clearTimeout(timeoutID);
   }
-  stopPolling();
   continuePolling = false;
 }
 
-function stopPolling() {
-  document.querySelector(".trackInfo").innerHTML = ``;
-  document.querySelector(".artworkContainer").innerHTML = ``;
-
+export function signOut() {
+  stopPolling();
+  removeTrackInfo();
   clearCookiesAndResetPath();
 }
 
-function increasePollingInterval() {
-  pollingInterval = pollingInterval * 2;
-}
-
-function decreasePollingInterval() {
-  pollingInterval = INITIAL_POLLING_INTERVAL;
-}

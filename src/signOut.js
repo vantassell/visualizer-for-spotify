@@ -15,9 +15,4 @@ export function clearCookiesAndResetPath() {
   console.log("exiting cookies and resetting path");
 
   window.location.search = "";
-  // const url = window.location;
-  // url.search = "";
-  // const urlWithoutTokenParams = url.toString();
-  // console.log(`url: ${url}`);
-  // window.location.href = "/";
 }
