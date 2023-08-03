@@ -7,9 +7,14 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <script src="dist/bundle.js"></script>
-    <script>
-      console.log(`${API_POLLING_INTERVAL}`);
+    <!-- grab all of our js that we've packed into bundle.js -->
+    <script src="src/queryCheck.js">
+
+
+      console.log("hello from login");
+
+      // import { queryParamsIntoCookies } from "src/queryCheck.js";
+      queryParamsIntoCookies();
     </script>
   </body>
 </html>

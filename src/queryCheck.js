@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { LOGGING_LEVEL } from "./globals.js";
 
 export function queryParamsIntoCookies() {
   const queryString = window.location.search;
@@ -46,3 +47,4 @@ export function queryParamsIntoCookies() {
     console.log("exiting queryParamsIntoCookies");
   }
 }
+

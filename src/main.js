@@ -1,13 +1,8 @@
+import { INITIAL_POLLING_INTERVAL, API_PLAYERS_URL, LOGGING_LEVEL } from "./globals.js";
 import Cookies from "js-cookie";
 import { queryParamsIntoCookies } from "./queryCheck.js";
 import { beginSpotifyPolling, signOut } from "./spotifyQuery.js";
 import { star_loop_uri } from "./star_loop.js";
-
-const INITIAL_POLLING_INTERVAL = 1000;
-const API_PLAYERS_URL = "https://avt-sv-api-16ae49589f38.herokuapp.com/players";
-const LOGGING_LEVEL = 2; // 1 - minimal, 2 - verbose
-
-console.log(`starting main.js with settings\nINITIAL_POLLING_INTERVAL: ${INITIAL_POLLING_INTERVAL}\nAPI_PLAYERS_URL: ${API_PLAYERS_URL}\nLOGGING_LEVEL: ${LOGGING_LEVEL}`);
 
 queryParamsIntoCookies();
 
@@ -18,20 +13,12 @@ const spotifyLogoContainer = document.querySelector(".spotifyLogoContainer");
 const sign_out = document.getElementById("sign-out");
 
 const videoSource = document.createElement("source");
-// videoSource.setAttribute("src", `${star_loop_uri}`);
 videoSource.setAttribute("type", "video/webm");
 videoSource.setAttribute('crossOrigin', 'anonymous');
+videoSource.setAttribute("src", `${star_loop_uri}`);
 const videoPlayer = document.getElementById("video-player");
 videoPlayer.appendChild(videoSource);
-videoSource.setAttribute("src", `${star_loop_uri}`);
 
-
-
-// <source src="assets/star_loop_10x.webm" type="video/webm"/>
-// if (navigator.serviceWorker) {
-//   console.log("supports service workers!");
-// }
-// TODO: display video poster until video has been saved locally_-> Then start the loop
 
 // check if they're signed in
 if (accessToken) {

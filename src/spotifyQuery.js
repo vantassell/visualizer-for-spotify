@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { INITIAL_POLLING_INTERVAL, API_PLAYERS_URL, LOGGING_LEVEL } from "./globals.js";
 import { clearCookiesAndResetPath } from "./signOut.js";
 
 let pollingInterval = INITIAL_POLLING_INTERVAL;
