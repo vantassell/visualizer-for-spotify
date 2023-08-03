@@ -1,13 +1,13 @@
 {
-  "name": "spotify-visualizer-webapp-simp",
+  "name": "spotify-visualizer-webapp",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
-  "author": "",
+  "author": "Andrew Van Tassell",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^5.88.1",

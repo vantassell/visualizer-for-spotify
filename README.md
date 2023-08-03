@@ -110,3 +110,6 @@ TODO: Consider doing two-pass compression on the webm. I don't know what bitrate
 
 ## ffmpeg docs for vp9 encoding ##
 `https://trac.ffmpeg.org/wiki/Encode/VP9`
+
+## encoding video file as base64 via terminal ##
+`echo "data:video/webm;base64,"$(cat ./star_loop_short.webm | base64) >> encode.txt`

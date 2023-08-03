@@ -1,5 +1,10 @@
 import Cookies from "js-cookie";
-import { clearCookiesAndResetPath } from "./queryCheck.js";
+import {
+  API_PLAYERS_URL,
+  INITIAL_POLLING_INTERVAL,
+  LOGGING_LEVEL,
+} from "./globals.js";
+import { clearCookiesAndResetPath } from "./signOut.js";
 
 let pollingInterval = INITIAL_POLLING_INTERVAL;
 let continuePolling = false;
@@ -100,6 +105,12 @@ export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
          alt="album art"
      />
   `;
+  console.log("done updating Track Info");
+}
+
+function removeTrackInfo() {
+  document.querySelector(".trackInfo").innerHTML = ``;
+  document.querySelector(".artworkContainer").innerHTML = ``;
 }
 
 export function beginSpotifyPolling() {
@@ -107,51 +118,40 @@ export function beginSpotifyPolling() {
   pollSpotify({ prevTitle: "", prevArtist: "", prevAlbum: "" });
 }
 
-function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
+async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
   console.log("polling api");
 
-  setTimeout(async () => {
-    if (!continuePolling) {
-      return;
-    }
+  if (!continuePolling) {
+    console.log("continuePolling is false");
+    return;
+  }
 
-    const { title, artist, album, artworkURL, error } =
-      await getCurrentTrackFromSpotify();
+  const { title, artist, album, artworkURL, error } =
+    await getCurrentTrackFromSpotify();
 
-    if (error) {
-      console.log(`ERROR getting currentTrack: ${error}`);
-    }
+  if (error) {
+    console.log(`ERROR getting currentTrack: ${error}`);
+  }
 
-    if (title !== prevTitle || artist !== prevArtist || album !== prevAlbum) {
-      updateTrackInfoTo({ title, artist, album, artworkURL });
-    }
+  if (title !== prevTitle || artist !== prevArtist || album !== prevAlbum) {
+    updateTrackInfoTo({ title, artist, album, artworkURL });
+  }
 
-    // keep the polling going
-    timeoutID = setTimeout(() => {
-      pollSpotify({ prevTitle: title, prevArtist: artist, prevAlbum: album });
-    }, pollingInterval);
+  // keep the polling going
+  timeoutID = setTimeout(() => {
+    pollSpotify({ prevTitle: title, prevArtist: artist, prevAlbum: album });
   }, pollingInterval);
 }
 
-export function stopPollingAndSignOut() {
+function stopPolling() {
   if (timeoutID) {
     clearTimeout(timeoutID);
   }
-  stopPolling();
   continuePolling = false;
 }
 
-function stopPolling() {
-  document.querySelector(".trackInfo").innerHTML = ``;
-  document.querySelector(".artworkContainer").innerHTML = ``;
-
+export function signOut() {
+  stopPolling();
+  removeTrackInfo();
   clearCookiesAndResetPath();
-}
-
-function increasePollingInterval() {
-  pollingInterval = pollingInterval * 2;
-}
-
-function decreasePollingInterval() {
-  pollingInterval = INITIAL_POLLING_INTERVAL;
 }

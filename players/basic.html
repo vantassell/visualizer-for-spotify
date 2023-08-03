@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <title>Visualizer for Spotify</title>
+    <link rel="stylesheet" href="../style.css"/>
+
+    <!--    put all of my global magic numbers here    -->
+    <!-- <script> -->
+    <!--     const INITIAL_POLLING_INTERVAL = 1000; -->
+    <!--     const API_PLAYERS_URL = "https://avt-sv-api-16ae49589f38.herokuapp.com/players"; -->
+    <!--     const LOGGING_LEVEL = 2; // 1 - minimal, 2 - verbose -->
+    <!-- </script> -->
+</head>
+<body>
+<video autoplay muted loop class="video-player" id="video-player" poster="../assets/star_loop_frame0.png" crossorigin="anonymous">
+    <!-- <source src="assets/star_loop_10x.webm" type="video/webm"/> -->
+    <!-- <source id="video-source" type="video/webm"/> -->
+</video>
+
+<div class="row">
+    <div class="trackInfoContainer">
+        <div class="trackInfo"></div>
+    </div>
+    <div class="spotifyLogoContainer">
+        <button class="sign-out" id="sign-out">Sign Out of</button>
+        <img class="spotifyLogo" src="../assets/spotify/Spotify_Logo_RGB_Green.png" alt="spotify logo">
+    </div>
+</div>
+<div class="artworkContainer"></div>
+
+<!-- grab all of our js that we've packed into bundle.js -->
+<script src="../dist/basic.bundle.js"></script>
+</body>
+</html>
