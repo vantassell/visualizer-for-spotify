@@ -12,6 +12,7 @@ const sign_in = document.querySelector(".sign-in");
 const spotifyLogoContainer = document.querySelector(".spotifyLogoContainer");
 const sign_out = document.getElementById("sign-out");
 
+// Add star loop video
 const videoSource = document.createElement("source");
 videoSource.setAttribute("type", "video/webm");
 videoSource.setAttribute('crossOrigin', 'anonymous');

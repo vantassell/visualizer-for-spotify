@@ -14,12 +14,8 @@
 <body>
 <video autoplay muted loop class="video-player" id="video-player" poster="assets/star_loop_frame0.png" crossorigin="anonymous">
     <!-- <source src="assets/star_loop_10x.webm" type="video/webm"/> -->
+    <source id="video-source" type="video/webm"/>
 </video>
-
-<div class="sign-in">
-    <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
-        Sign into <span class="sign-in__spotify">Spotify</span></a>
-</div>
 
 <div class="row">
     <div class="trackInfoContainer">
@@ -33,9 +29,6 @@
 <div class="artworkContainer"></div>
 
 <!-- grab all of our js that we've packed into bundle.js -->
-<script src="dist/index.bundle.js"></script>
-    <!-- <script> -->
-    <!-- console.log('hi from second script '); -->
-    <!-- </script> -->
+<script src="/dist/basic.bundle.js"></script>
 </body>
 </html>

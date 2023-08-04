@@ -1,20 +1,15 @@
-!<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Visualizer For Spotify</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="style.css" rel="stylesheet" />
+    <link href="/style.css" rel="stylesheet" />
   </head>
   <body>
+    <p class=login-result></p>
+    <h3 class=redirect-notice>Redirecting you in 3, 2, 1...</h3>
     <!-- grab all of our js that we've packed into bundle.js -->
-    <script src="src/queryCheck.js">
-
-
-      console.log("hello from login");
-
-      // import { queryParamsIntoCookies } from "src/queryCheck.js";
-      queryParamsIntoCookies();
-    </script>
+    <script src="dist/login.bundle.js"></script>
   </body>
 </html>
