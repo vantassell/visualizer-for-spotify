@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Visualizer for Spotify</title>
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="../style.css"/>
 
     <!--    put all of my global magic numbers here    -->
     <!-- <script> -->
@@ -12,7 +12,7 @@
     <!-- </script> -->
 </head>
 <body>
-<video autoplay muted loop class="video-player" id="video-player" poster="/assets/star_loop_frame0.png" crossorigin="anonymous">
+<video autoplay muted loop class="video-player" id="video-player" poster="../assets/star_loop_frame0.png" crossorigin="anonymous">
     <!-- <source src="assets/star_loop_10x.webm" type="video/webm"/> -->
     <source id="video-source" type="video/webm"/>
 </video>
@@ -23,12 +23,12 @@
     </div>
     <div class="spotifyLogoContainer">
         <button class="sign-out" id="sign-out">Sign Out of</button>
-        <img class="spotifyLogo" src="/assets/spotify/Spotify_Logo_RGB_Green.png" alt="spotify logo">
+        <img class="spotifyLogo" src="../assets/spotify/Spotify_Logo_RGB_Green.png" alt="spotify logo">
     </div>
 </div>
 <div class="artworkContainer"></div>
 
 <!-- grab all of our js that we've packed into bundle.js -->
-<script src="/dist/basic.bundle.js"></script>
+<script src="../dist/basic.bundle.js"></script>
 </body>
 </html>
