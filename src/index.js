@@ -5,7 +5,6 @@ import { beginSpotifyPolling, signOut } from "./spotifyQuery.js";
 import { star_loop_uri } from "./star_loop.js";
 
 console.log("starting index.js");
-// queryParamsIntoCookies();
 
 const accessToken = Cookies.get("accessToken");
 

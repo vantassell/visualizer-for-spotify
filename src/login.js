@@ -19,13 +19,13 @@ if (accessToken) {
   `;
 
   setTimeout(() => {
-    window.location.replace("/players/basic");
+    window.location.replace("/spotify-visualizer-webapp/players/basic");
   }, 2000);
 } else {
   document.querySelector(".login-result").innerHTML = `
     Failed to login, returning to home page.
 `;
   setTimeout(() => {
-    window.location.replace("/");
+    window.location.replace("/spotify-visualizer-webapp/");
   }, 2000);
 }
