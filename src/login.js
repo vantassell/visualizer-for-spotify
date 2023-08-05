@@ -19,8 +19,7 @@ if (accessToken) {
     const currentURL = window.location.toString().replace("login", "players/basic")
     console.log(currentURL);
   setTimeout(() => {
-    window.location.replace("../players/basic");
-
+    window.location.replace(currentURL);
   }, 4000);
 } else {
   document.querySelector(".login-result").innerHTML = `
