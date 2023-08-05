@@ -6,9 +6,6 @@ console.log("hello from login.js");
 queryParamsIntoCookies();
 
 const accessToken = Cookies.get("accessToken");
-// const refereshToken = Cookies.get("refreshToken");
-// const expiredAt = Cookies.get("expiresAt");
-// const email = Cookies.get("email");
 const displayName = Cookies.get("displayName");
 
 if (accessToken) {
@@ -16,16 +13,21 @@ if (accessToken) {
     Success! Signed in as ${displayName}. Launching your visualizer now!!
   `;
 
-    const currentURL = window.location.toString().replace("login", "players/basic")
-    console.log(currentURL);
+  const baseURL = window.location.toString().split('/login')[0];
+  console.log(`baseURL: ${baseURL}`);
+
   setTimeout(() => {
-    window.location.replace(currentURL);
+    const redirectTo = baseURL + '/players/basic';
+    console.log(`redirecting to: ${redirectTo}`)
+    window.location.replace(redirectTo);
   }, 4000);
 } else {
   document.querySelector(".login-result").innerHTML = `
     Failed to login, returning to home page.
 `;
   setTimeout(() => {
-    // window.location.replace("/spotify-visualizer-webapp/");
+    const redirectTo = baseURL + '/';
+    console.log(`redirecting to: ${redirectTo}`)
+    window.location.replace(redirectTo);
   }, 2000);
 }

@@ -13,14 +13,14 @@ if (!accessToken) {
 const sign_out = document.getElementById("sign-out");
 
 // Add star loop video
-// const videoSource = document.createElement("source");
-// videoSource.setAttribute("type", "video/webm");
-// videoSource.setAttribute("crossOrigin", "anonymous");
-// videoSource.setAttribute("src", `${star_loop_uri}`);
-// const videoPlayer = document.getElementById("video-player");
-// videoPlayer.appendChild(videoSource);
-const videoSource = document.getElementById("video-source");
+const videoSource = document.createElement("source");
+videoSource.setAttribute("type", "video/webm");
+videoSource.setAttribute("crossOrigin", "anonymous");
 videoSource.setAttribute("src", `${star_loop_uri}`);
+const videoPlayer = document.getElementById("video-player");
+videoPlayer.appendChild(videoSource);
+// const videoSource = document.getElementById("video-source");
+// videoSource.setAttribute("src", `${star_loop_uri}`);
 
 console.log(`signed into players_basic with accessToken: ${accessToken}`);
 
