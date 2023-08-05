@@ -1,0 +1,158 @@
+*,
+:before,
+:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+}
+
+.sign-in {
+  margin: auto auto;
+  z-index: 99;
+}
+
+.sign-in a,
+.sign-in a:visited {
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  font-size: 3em;
+  color: white;
+  cursor: pointer;
+}
+
+.sign-in__spotify,
+.go-to-player__player{
+  coor: #1ed760;
+  text-shadow: 1px 1px 5px #1e96d7;
+}
+
+.go-to-player {
+  z-index: 99;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  font-size: 3em;
+  color: white;
+  cursor: pointer;
+}
+
+
+.video-player {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  object-fit: fill;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+}
+
+.trackInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.trackInfo {
+  font-size: 1.5rem;
+  padding-left: 3rem;
+  z-index: 2;
+
+  /* Simple White Text color */
+  color: white;
+  text-shadow: black -1px 1px 5px;
+  font-weight: normal;
+
+  /*
+          Dynamic Inverted Text color
+      */
+  /*background: inherit;*/
+  /*background-clip: text;*/
+  /*color: transparent;*/
+  /*filter: invert(1) grayscale(1) contrast(8);*/
+}
+
+.sign-out {
+  text-align: end;
+  padding: 0 0 0 3.4rem;
+  margin: auto auto -1rem auto;
+  color: white;
+  filter: opacity(0.3);
+  text-shadow: black -1px 1px 5px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.spotifyLogoContainer {
+  height: 100%;
+  z-index: 20;
+  object-fit: contain;
+  width: 300px;
+  min-height: 183px;
+  overflow: hidden;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.spotifyLogo {
+  height: 50%;
+  width: 100%;
+  object-fit: scale-down;
+  overflow: hidden;
+  /*filter: opacity(0.5);*/
+}
+
+.artworkContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.artwork {
+  position: relative;
+
+  border-radius: 3px;
+  aspect-ratio: 1 / 1;
+  max-height: 60%;
+  height: auto;
+  flex-grow: 1;
+  filter: brightness(0.8);
+
+  box-shadow: 0px 0px 100px 10px #777;
+  /*
+          if you want to make the blur match the image,
+          simply add a blurred copy of the image behind it
+          that's slightly larger ;)
+      */
+}
