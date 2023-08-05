@@ -1,4 +1,6 @@
 import { beginSpotifyPolling, signOut } from "./spotifyQuery";
+import Cookies from "js-cookie";
+import { star_loop_uri } from "./star_loop";
 
 console.log("starting players_basic.js");
 

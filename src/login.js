@@ -1,9 +1,7 @@
 import Cookies from "js-cookie";
-import { API_PLAYERS_URL } from "./globals";
 import { queryParamsIntoCookies } from "./queryCheck";
 
 console.log("hello from login.js");
-console.log(`api_url: ${API_PLAYERS_URL}`);
 
 queryParamsIntoCookies();
 
@@ -18,14 +16,17 @@ if (accessToken) {
     Success! Signed in as ${displayName}. Launching your visualizer now!!
   `;
 
+    const currentURL = window.location.toString().replace("login", "players/basic")
+    console.log(currentURL);
   setTimeout(() => {
-    window.location.replace("/spotify-visualizer-webapp/players/basic");
-  }, 2000);
+    window.location.replace("/players/basic");
+
+  }, 4000);
 } else {
   document.querySelector(".login-result").innerHTML = `
     Failed to login, returning to home page.
 `;
   setTimeout(() => {
-    window.location.replace("/spotify-visualizer-webapp/");
+    // window.location.replace("/spotify-visualizer-webapp/");
   }, 2000);
 }
