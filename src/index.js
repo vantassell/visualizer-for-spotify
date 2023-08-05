@@ -29,7 +29,7 @@ if (accessToken && displayName) {
   const playerLink = document.querySelector(".go-to-player");
   playerLink.style.display = "block";
   playerLink.innerHTML = `
-      <a href="redirectTo">Go to ${displayName}'s <span class=go-to-player__player>Player</span></a>
+      <a href="${redirectTo}">Go to ${displayName}'s <span class=go-to-player__player>Player</span></a>
 `;
 }
 
