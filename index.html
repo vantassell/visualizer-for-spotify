@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
-<head>
-    <title>Visualizer for Spotify</title>
-    <link rel="stylesheet" href="style.css"/>
+  <head>
+    <title>Visualizer for Spotify Homepage</title>
+    <link rel="stylesheet" href="style.css" />
 
     <!--    put all of my global magic numbers here    -->
     <!-- <script> -->
@@ -10,22 +10,34 @@
     <!--     const API_PLAYERS_URL = "https://avt-sv-api-16ae49589f38.herokuapp.com/players"; -->
     <!--     const LOGGING_LEVEL = 2; // 1 - minimal, 2 - verbose -->
     <!-- </script> -->
-</head>
-<body>
-<video autoplay muted loop class="video-player" id="video-player" poster="assets/star_loop_frame0.png" crossorigin="anonymous">
-    <!-- <source src="assets/star_loop_10x.webm" type="video/webm"/> -->
-</video>
+  </head>
+  <body>
+    <video
+      autoplay
+      muted
+      loop
+      class="video-player"
+      id="video-player"
+      poster="assets/star_loop_frame0.png"
+      crossorigin="anonymous"
+    >
+      <!-- <source src="assets/star_loop_10x.webm" type="video/webm"/> -->
+    </video>
 
-<div class="sign-in">
-    <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
-        Sign into <span class="sign-in__spotify">Spotify</span></a>
-</div>
+    <div class="new-sign-in">
+      <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
+        Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
+      
+    </div>
 
+    <div class="go-to-player">
+      <!-- <a href="/players/basic.html">Go to <span class=go-to-player__player>Player</span></a> -->
+    </div>
 
-<!-- grab all of our js that we've packed into bundle.js -->
-<script src="dist/index.bundle.js"></script>
+    <!-- grab all of our js that we've packed into bundle.js -->
+    <script src="dist/index.bundle.js"></script>
     <!-- <script> -->
     <!-- console.log('hi from second script '); -->
     <!-- </script> -->
-</body>
+  </body>
 </html>
