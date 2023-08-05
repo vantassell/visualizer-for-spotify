@@ -1,16 +1,11 @@
-import { INITIAL_POLLING_INTERVAL, API_PLAYERS_URL, LOGGING_LEVEL } from "./globals.js";
 import Cookies from "js-cookie";
-import { queryParamsIntoCookies } from "./queryCheck.js";
-import { beginSpotifyPolling, signOut } from "./spotifyQuery.js";
 import { star_loop_uri } from "./star_loop.js";
 
 console.log("starting index.js");
 
 const accessToken = Cookies.get("accessToken");
 
-const sign_in = document.querySelector(".sign-in");
-const spotifyLogoContainer = document.querySelector(".spotifyLogoContainer");
-const sign_out = document.getElementById("sign-out");
+// const sign_in = document.querySelector(".sign-in");
 
 // Add star loop video
 const videoSource = document.createElement("source");
@@ -25,29 +20,13 @@ videoPlayer.appendChild(videoSource);
 if (accessToken) {
   console.log(`signed in with accessToken: ${accessToken}`);
 
-  if (sign_in) {
-    sign_in.style.display = "none";
-  }
+  const baseURL = window.location.toString()
+  console.log(`baseURL: ${baseURL}`);
 
-  if (spotifyLogoContainer) {
-    spotifyLogoContainer.style.display = "flex";
-  }
+  // NOTE: this baseURL ends with a / because there's nothing to split on.
+  const redirectTo = baseURL + 'players/basic';
+  console.log(`redirecting to: ${redirectTo}`)
+  window.location.replace(redirectTo);
+} 
 
-  if (sign_out) {
-    sign_out.addEventListener("click", () => {
-      console.log("signout clicked");
-      signOut();
-    });
-  }
-  beginSpotifyPolling();
-} else {
-  console.log("no accessToken found");
-
-  if (sign_in) {
-    sign_in.style.display = "block";
-  }
-  if (spotifyLogoContainer) {
-    spotifyLogoContainer.style.display = "none";
-  }
-}
 console.log("exiting index.js");
