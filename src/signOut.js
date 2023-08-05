@@ -14,5 +14,11 @@ export function clearCookiesAndResetPath() {
   console.log(`expiresAt: ${Cookies.get("expiresAt")}`);
   console.log("exiting cookies and resetting path");
 
-  window.location.search = "";
+  // is only called from /players/*
+  const baseURL = window.location.toString().split('/players')[0];
+  console.log(`baseURL: ${baseURL}`);
+
+  const redirectTo = baseURL + '';
+  console.log(`redirecting to: ${redirectTo}`)
+  window.location.replace(redirectTo);
 }
