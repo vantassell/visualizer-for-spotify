@@ -18,7 +18,8 @@ body {
 }
 
 .new-sign-in,
-.go-to-player {
+.go-to-player,
+.sign-out-user {
   /* margin: auto auto; */
   z-index: 99;
   margin: 3rem;
@@ -27,7 +28,8 @@ body {
 .new-sign-in a,
 .new-sign-in a:visited,
 .go-to-player a,
-.go-to-player a:visited {
+.go-to-player a:visited,
+.sign-out-user button {
   text-decoration: none;
   font-weight: bold;
   font-family: Tahoma, sans-serif;
@@ -40,6 +42,13 @@ body {
 .go-to-player__player{
   color: #1ed760;
   text-shadow: 1px 1px 5px #1e96d7;
+}
+
+.sign-out-user button {
+  border: none;
+  background-color: transparent;
+
+    
 }
 
 
