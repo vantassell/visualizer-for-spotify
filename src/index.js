@@ -1,11 +1,9 @@
-import Cookies from "js-cookie";
 import { star_loop_uri } from "./star_loop.js";
 import { getUserData } from "./userData.js";
+import { signOutUser } from "./signOut.js";
 
 console.log("starting index.js");
 
-// const accessToken = Cookies.get("accessToken");
-// const displayName = Cookies.get("displayName");
 // const sign_in = document.querySelector(".sign-in");
 
 // Add star loop video
@@ -32,5 +30,19 @@ if (accessToken && displayName) {
   playerLink.innerHTML = `
       <a href="${redirectTo}">Go to ${displayName}'s <span class=go-to-player__player>Player</span></a>
     `;
+
+  const signOutUserElement = document.querySelector(".sign-out-user");
+  signOutUserElement.style.display = "block";
+  signOutUserElement.innerHTML = `
+      <button class="sign-out-button" id="sign-out-button">Sign Out ${displayName} from this device</button>
+  `;
+  const signOutButton = document.getElementById("sign-out-button");
+  if (signOutButton) {
+    signOutButton.addEventListener("click", () => {
+      console.log("signout clicked");
+      signOutUser();
+      window.location.reload();
+    });
+  }
 }
 console.log("exiting index.js");

@@ -1,4 +1,3 @@
-// import Cookies from "js-cookie";
 import {
   API_PLAYERS_URL,
   INITIAL_POLLING_INTERVAL,
@@ -90,7 +89,7 @@ export async function getCurrentTrackFromSpotify() {
 
 export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
   console.log(
-    `-- Updating Track Info to --\n   ${title}\n   ${artist}\n   ${album}\n   ${artworkURL}\n`,
+    `Updating Track Info to\n--\n\t${title}\n\t${artist}\n\t${album}\n\t${artworkURL}\n--`,
   );
 
   if (title && artist && album) {
