@@ -61,9 +61,9 @@ export async function getCurrentTrackFromSpotify() {
   // check for backoff from Spotify (could be 429, or another error)
   if (backOff) {
     pollingInterval *= 2;
-  } else {
-    pollingInterval = INITIAL_POLLING_INTERVAL;
-  }
+  } // else {
+  //   pollingInterval = Math.max(pollingInterval * 0.95, INITIAL_POLLING_INTERVAL);
+  // }
 
   // check if we got a new accessToken
   if (newAccessToken) {
