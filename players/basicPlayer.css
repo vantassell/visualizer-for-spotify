@@ -11,44 +11,13 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
+  justify-content: space-between;
   font-weight: bold;
   font-family: Tahoma, sans-serif;
 }
-
-.sign-in {
-  margin: auto auto;
-  z-index: 99;
-}
-
-.sign-in a,
-.sign-in a:visited {
-  text-decoration: none;
-  font-weight: bold;
-  font-family: Tahoma, sans-serif;
-  font-size: 3em;
-  color: white;
-  cursor: pointer;
-}
-
-.sign-in__spotify,
-.go-to-player__player{
-  coor: #1ed760;
-  text-shadow: 1px 1px 5px #1e96d7;
-}
-
-.go-to-player {
-  z-index: 99;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: Tahoma, sans-serif;
-  font-size: 3em;
-  color: white;
-  cursor: pointer;
-}
-
-
 .video-player {
+  z-index: -1;
   position: absolute;
   height: 100vh;
   width: 100vw;
@@ -90,6 +59,7 @@ body {
 }
 
 .sign-out {
+  visibility: hidden;
   text-align: end;
   padding: 0 0 0 3.4rem;
   margin: auto auto -1rem auto;
@@ -156,3 +126,32 @@ body {
           that's slightly larger ;)
       */
 }
+  .back-button-container {
+     height: 100px; 
+  padding: 2rem 0 0 3rem;
+  background-color: transparent;
+  border: none;
+  /* padding: 0px; */
+  z-index: 2;
+  }
+.back-button-container button {
+  height: 100%;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+
+  .back-button-container svg {
+height: 100%;
+  background-color: transparent;
+  padding: 0px;
+  border: none;
+  /* color: white; */
+  font-size: 200px;
+  } 
+  .back-button-container path {
+fill: #333;
+    height: 100%;
+    width: 100%;
+  }
+

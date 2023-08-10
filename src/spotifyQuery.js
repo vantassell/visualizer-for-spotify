@@ -1,14 +1,17 @@
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import {
   API_PLAYERS_URL,
   INITIAL_POLLING_INTERVAL,
   LOGGING_LEVEL,
 } from "./globals.js";
 import { clearCookiesAndResetPath } from "./signOut.js";
+import { updateUserData } from "./userData.js";
 
 let pollingInterval = INITIAL_POLLING_INTERVAL;
 let continuePolling = false;
 let timeoutID = undefined;
+let accessToken;
+let refreshToken;
 
 function encodeParamsForQuery(params) {
   var queryString = Object.keys(params)
@@ -25,12 +28,7 @@ export async function getCurrentTrackFromSpotify() {
     console.log("starting getCurrentTrackFromSpotify");
   }
 
-  const params = {
-    accessToken: Cookies.get("accessToken"),
-    refreshToken: Cookies.get("refreshToken"),
-  };
-
-  const queryParams = encodeParamsForQuery(params);
+  const queryParams = encodeParamsForQuery({ accessToken, refreshToken });
 
   const query = `${API_PLAYERS_URL}?${queryParams}`;
   if (LOGGING_LEVEL === 2) {
@@ -70,15 +68,16 @@ export async function getCurrentTrackFromSpotify() {
 
   // check if we got a new accessToken
   if (newAccessToken) {
-    Cookies.remove("accessToken");
-    Cookies.set("accessToken", newAccessToken);
-    console.log(`updated accessToken to: ${newAccessToken}`);
+    console.log(`recieved updated accessToken: ${newAccessToken}`);
+    updateUserData({ accessToken: newAccessToken });
+
+    // save the accessToken locally to avoid calling localstorage on every call
+    accessToken = newAccessToken;
   }
 
   if (newExpiresAt) {
-    Cookies.remove("expiresAt");
-    Cookies.set("expiresAt", newExpiresAt);
-    console.log(`updated expiredAt to: ${newExpiresAt}`);
+    console.log(`received updated expiredAt: ${newExpiresAt}`);
+    updateUserData({ expiredAt: newExpiresAt });
   }
 
   let error;
@@ -90,36 +89,54 @@ export async function getCurrentTrackFromSpotify() {
 }
 
 export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
-  console.log("updating Track Info");
+  console.log(
+    `-- Updating Track Info to --\n   ${title}\n   ${artist}\n   ${album}\n   ${artworkURL}\n`,
+  );
 
-  document.querySelector(".trackInfo").innerHTML = `
+  if (title && artist && album) {
+    document.querySelector(".trackInfo").innerHTML = `
       <p>Track: ${title}</p>
       <p>Artist: ${artist}</p>
       <p>Album: ${album}</p>
   `;
+  } else {
+    document.querySelector(".trackInfo").innerHTML = "";
+  }
 
-  document.querySelector(".artworkContainer").innerHTML = `
+  if (artworkURL) {
+    document.querySelector(".artworkContainer").innerHTML = `
      <img
          class=artwork
          src=${artworkURL}
          alt="album art"
      />
   `;
-  console.log("done updating Track Info");
+  } else {
+    document.querySelector(".artworkContainer").innerHTML = "";
+  }
 }
 
 function removeTrackInfo() {
-  document.querySelector(".trackInfo").innerHTML = ``;
-  document.querySelector(".artworkContainer").innerHTML = ``;
+  document.querySelector(".trackInfo").innerHTML = "";
+  document.querySelector(".artworkContainer").innerHTML = "";
 }
 
-export function beginSpotifyPolling() {
+export function beginSpotifyPolling(initialAccessToken, initialsRefreshToken) {
+  console.log("init accessToken", initialAccessToken);
+  console.log("init refreshTOken", initialsRefreshToken);
+  // const { accessTokenFromStorage, refreshTokenFromStorage } = getUserData();
+  // accessToken = accessTokenFromStorage;
+  // refreshToken = refreshTokenFromStorage;
+  accessToken = initialAccessToken;
+  refreshToken = initialsRefreshToken;
   continuePolling = true;
   pollSpotify({ prevTitle: "", prevArtist: "", prevAlbum: "" });
 }
 
 async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
-  console.log("polling api");
+  if (LOGGING_LEVEL === 2) console.log("polling api");
+  console.log("accessToken", accessToken);
+  console.log("refreshTOken", refreshToken);
 
   if (!continuePolling) {
     console.log("continuePolling is false");
