@@ -53,6 +53,7 @@ export async function getCurrentTrackFromSpotify() {
     artist,
     album,
     artworkURL,
+    spotifyTrackLink,
     backOff,
     newAccessToken,
     newExpiresAt,
@@ -84,10 +85,16 @@ export async function getCurrentTrackFromSpotify() {
   if (LOGGING_LEVEL === 2) {
     console.log("exiting getCurrentTrackFromSpotify");
   }
-  return { title, artist, album, artworkURL, error };
+  return { title, artist, album, artworkURL, spotifyTrackLink, error };
 }
 
-export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
+export function updateTrackInfoTo({
+  title,
+  artist,
+  album,
+  artworkURL,
+  spotifyTrackLink,
+}) {
   console.log(
     `Updating Track Info to\n--\n\t${title}\n\t${artist}\n\t${album}\n\t${artworkURL}\n--`,
   );
@@ -104,14 +111,24 @@ export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
 
   if (artworkURL) {
     document.querySelector(".artworkContainer").innerHTML = `
-     <img
-         class=artwork
-         src=${artworkURL}
-         alt="album art"
-     />
+        <img
+           class=artwork
+           src=${artworkURL}
+           alt="album art"
+       />
   `;
   } else {
     document.querySelector(".artworkContainer").innerHTML = "";
+  }
+
+  if (spotifyTrackLink) {
+    document
+      .getElementById("spotify-linkback-button")
+      .addEventListener("click", () => {
+        console.log("linkback clicked!");
+        console.log(`linkback: ${spotifyTrackLink}`);
+        window.location.assign(spotifyTrackLink);
+      });
   }
 }
 
@@ -142,7 +159,7 @@ async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
     return;
   }
 
-  const { title, artist, album, artworkURL, error } =
+  const { title, artist, album, artworkURL, spotifyTrackLink, error } =
     await getCurrentTrackFromSpotify();
 
   if (error) {
@@ -150,7 +167,7 @@ async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
   }
 
   if (title !== prevTitle || artist !== prevArtist || album !== prevAlbum) {
-    updateTrackInfoTo({ title, artist, album, artworkURL });
+    updateTrackInfoTo({ title, artist, album, artworkURL, spotifyTrackLink });
   }
 
   // keep the polling going
