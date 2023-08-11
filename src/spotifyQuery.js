@@ -53,6 +53,7 @@ export async function getCurrentTrackFromSpotify() {
     artist,
     album,
     artworkURL,
+    spotifyTrackLink,
     backOff,
     newAccessToken,
     newExpiresAt,
@@ -61,9 +62,9 @@ export async function getCurrentTrackFromSpotify() {
   // check for backoff from Spotify (could be 429, or another error)
   if (backOff) {
     pollingInterval *= 2;
-  } // else {
-  //   pollingInterval = Math.max(pollingInterval * 0.95, INITIAL_POLLING_INTERVAL);
-  // }
+  } else {
+    pollingInterval = Math.max(pollingInterval * 0.95, INITIAL_POLLING_INTERVAL);
+  }
 
   // check if we got a new accessToken
   if (newAccessToken) {
@@ -84,10 +85,16 @@ export async function getCurrentTrackFromSpotify() {
   if (LOGGING_LEVEL === 2) {
     console.log("exiting getCurrentTrackFromSpotify");
   }
-  return { title, artist, album, artworkURL, error };
+  return { title, artist, album, artworkURL, spotifyTrackLink, error };
 }
 
-export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
+export function updateTrackInfoTo({
+  title,
+  artist,
+  album,
+  artworkURL,
+  spotifyTrackLink,
+}) {
   console.log(
     `Updating Track Info to\n--\n\t${title}\n\t${artist}\n\t${album}\n\t${artworkURL}\n--`,
   );
@@ -104,14 +111,24 @@ export function updateTrackInfoTo({ title, artist, album, artworkURL }) {
 
   if (artworkURL) {
     document.querySelector(".artworkContainer").innerHTML = `
-     <img
-         class=artwork
-         src=${artworkURL}
-         alt="album art"
-     />
+        <img
+           class=artwork
+           src=${artworkURL}
+           alt="album art"
+       />
   `;
   } else {
     document.querySelector(".artworkContainer").innerHTML = "";
+  }
+
+  if (spotifyTrackLink) {
+    document
+      .getElementById("spotify-linkback-button")
+      .addEventListener("click", () => {
+        console.log("linkback clicked!");
+        console.log(`linkback: ${spotifyTrackLink}`);
+        window.location.assign(spotifyTrackLink);
+      });
   }
 }
 
@@ -121,11 +138,9 @@ function removeTrackInfo() {
 }
 
 export function beginSpotifyPolling(initialAccessToken, initialsRefreshToken) {
-  console.log("init accessToken", initialAccessToken);
-  console.log("init refreshTOken", initialsRefreshToken);
-  // const { accessTokenFromStorage, refreshTokenFromStorage } = getUserData();
-  // accessToken = accessTokenFromStorage;
-  // refreshToken = refreshTokenFromStorage;
+  console.log("initial accessToken", initialAccessToken);
+  console.log("initial refreshTOken", initialsRefreshToken);
+
   accessToken = initialAccessToken;
   refreshToken = initialsRefreshToken;
   continuePolling = true;
@@ -142,7 +157,7 @@ async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
     return;
   }
 
-  const { title, artist, album, artworkURL, error } =
+  const { title, artist, album, artworkURL, spotifyTrackLink, error } =
     await getCurrentTrackFromSpotify();
 
   if (error) {
@@ -150,7 +165,7 @@ async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
   }
 
   if (title !== prevTitle || artist !== prevArtist || album !== prevAlbum) {
-    updateTrackInfoTo({ title, artist, album, artworkURL });
+    updateTrackInfoTo({ title, artist, album, artworkURL, spotifyTrackLink });
   }
 
   // keep the polling going
