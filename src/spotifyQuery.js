@@ -55,15 +55,30 @@ export async function getCurrentTrackFromSpotify() {
     artworkURL,
     spotifyTrackLink,
     backOff,
+    currentlyPlayingNothing,
     newAccessToken,
     newExpiresAt,
+    error,
   } = await response.json();
+
+  if (currentlyPlayingNothing) {
+    return { artworkURL, currentlyPlayingNothing };
+  }
+
+  if (error) {
+    // general error, probably becuase Spotify thinks nothing is playing 
+    // (becuase the track recently changed and hasn't propogated internally throughout their API)
+    return { error }
+  }
 
   // check for backoff from Spotify (could be 429, or another error)
   if (backOff) {
     pollingInterval *= 2;
   } else {
-    pollingInterval = Math.max(pollingInterval * 0.95, INITIAL_POLLING_INTERVAL);
+    pollingInterval = Math.max(
+      pollingInterval * 0.95,
+      INITIAL_POLLING_INTERVAL,
+    );
   }
 
   // check if we got a new accessToken
@@ -80,12 +95,10 @@ export async function getCurrentTrackFromSpotify() {
     updateUserData({ expiredAt: newExpiresAt });
   }
 
-  let error;
-
   if (LOGGING_LEVEL === 2) {
     console.log("exiting getCurrentTrackFromSpotify");
   }
-  return { title, artist, album, artworkURL, spotifyTrackLink, error };
+  return { title, artist, album, artworkURL, spotifyTrackLink };
 }
 
 export function updateTrackInfoTo({
@@ -94,6 +107,7 @@ export function updateTrackInfoTo({
   album,
   artworkURL,
   spotifyTrackLink,
+  currentlyPlayingNothing,
 }) {
   console.log(
     `Updating Track Info to\n--\n\t${title}\n\t${artist}\n\t${album}\n\t${artworkURL}\n--`,
@@ -107,6 +121,12 @@ export function updateTrackInfoTo({
   `;
   } else {
     document.querySelector(".trackInfo").innerHTML = "";
+  }
+
+  if (currentlyPlayingNothing) {
+    document.querySelector(".trackInfo").innerHTML = `
+      <p>${currentlyPlayingNothing}
+    `;
   }
 
   if (artworkURL) {
@@ -144,10 +164,10 @@ export function beginSpotifyPolling(initialAccessToken, initialsRefreshToken) {
   accessToken = initialAccessToken;
   refreshToken = initialsRefreshToken;
   continuePolling = true;
-  pollSpotify({ prevTitle: "", prevArtist: "", prevAlbum: "" });
+  pollSpotify({ prevSpotifyTrackLink: "" });
 }
 
-async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
+async function pollSpotify({ prevSpotifyTrackLink }) {
   if (LOGGING_LEVEL === 2) console.log("polling api");
   console.log("accessToken", accessToken);
   console.log("refreshTOken", refreshToken);
@@ -157,20 +177,38 @@ async function pollSpotify({ prevTitle, prevArtist, prevAlbum }) {
     return;
   }
 
-  const { title, artist, album, artworkURL, spotifyTrackLink, error } =
-    await getCurrentTrackFromSpotify();
+  const {
+    title,
+    artist,
+    album,
+    artworkURL,
+    spotifyTrackLink,
+    currentlyPlayingNothing,
+    error
+  } = await getCurrentTrackFromSpotify();
 
-  if (error) {
-    console.log(`ERROR getting currentTrack: ${error}`);
+  if (currentlyPlayingNothing) {
+    console.log(`\n\n\tERROR: currentlyPlayingNothing\n\n`);
   }
 
-  if (title !== prevTitle || artist !== prevArtist || album !== prevAlbum) {
-    updateTrackInfoTo({ title, artist, album, artworkURL, spotifyTrackLink });
+  if(error) {
+    console.log(`\n\tERROR: ${error}\n`)
+  }
+
+  if (spotifyTrackLink !== prevSpotifyTrackLink && !error) {
+    updateTrackInfoTo({
+      title,
+      artist,
+      album,
+      artworkURL,
+      spotifyTrackLink,
+      currentlyPlayingNothing,
+    });
   }
 
   // keep the polling going
   timeoutID = setTimeout(() => {
-    pollSpotify({ prevTitle: title, prevArtist: artist, prevAlbum: album });
+    pollSpotify({ prevSpotifyTrackLink: spotifyTrackLink });
   }, pollingInterval);
 }
 

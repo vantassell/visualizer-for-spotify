@@ -11,7 +11,7 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end; 
   font-weight: bold;
   font-family: Tahoma, sans-serif;
 }
@@ -77,9 +77,9 @@ body {
   cursor: pointer;
 }
 
-/* .spotify-linkback-button:hover { */
-/* box-shadow: 10px 10px white; */
-/* } */
+.spotify-linkback-button:hover{
+  box-shadow: 10px 10px white;
+}
 
 .spotifyLogo {
   height:100%;
@@ -104,7 +104,7 @@ body {
 
 .artwork {
   position: relative;
-  aspect-ratio: 1 / 1;
+  /* aspect-ratio: 1 / 1; */
   max-height: 60%;
   height: auto;
   height: 100%;
