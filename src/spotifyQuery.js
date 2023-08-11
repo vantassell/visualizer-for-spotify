@@ -62,9 +62,9 @@ export async function getCurrentTrackFromSpotify() {
   // check for backoff from Spotify (could be 429, or another error)
   if (backOff) {
     pollingInterval *= 2;
-  } // else {
-  //   pollingInterval = Math.max(pollingInterval * 0.95, INITIAL_POLLING_INTERVAL);
-  // }
+  } else {
+    pollingInterval = Math.max(pollingInterval * 0.95, INITIAL_POLLING_INTERVAL);
+  }
 
   // check if we got a new accessToken
   if (newAccessToken) {
@@ -138,11 +138,9 @@ function removeTrackInfo() {
 }
 
 export function beginSpotifyPolling(initialAccessToken, initialsRefreshToken) {
-  console.log("init accessToken", initialAccessToken);
-  console.log("init refreshTOken", initialsRefreshToken);
-  // const { accessTokenFromStorage, refreshTokenFromStorage } = getUserData();
-  // accessToken = accessTokenFromStorage;
-  // refreshToken = refreshTokenFromStorage;
+  console.log("initial accessToken", initialAccessToken);
+  console.log("initial refreshTOken", initialsRefreshToken);
+
   accessToken = initialAccessToken;
   refreshToken = initialsRefreshToken;
   continuePolling = true;

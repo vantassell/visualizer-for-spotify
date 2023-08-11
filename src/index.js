@@ -4,8 +4,6 @@ import { signOutUser } from "./signOut.js";
 
 console.log("starting index.js");
 
-// const sign_in = document.querySelector(".sign-in");
-
 // Add star loop video
 const videoSource = document.createElement("source");
 videoSource.setAttribute("type", "video/webm");

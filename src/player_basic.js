@@ -23,21 +23,11 @@ videoSource.setAttribute("crossOrigin", "anonymous");
 videoSource.setAttribute("src", `${star_loop_uri}`);
 const videoPlayer = document.getElementById("video-player");
 videoPlayer.appendChild(videoSource);
-// const videoSource = document.getElementById("video-source");
-// videoSource.setAttribute("src", `${star_loop_uri}`);
 
 
 console.log(
   `signed into players_basic with accessToken: ${accessToken}\n and refreshToken: ${refreshToken}`,
 );
-
-// const sign_out = document.getElementById("sign-out");
-// if (sign_out) {
-//   sign_out.addEventListener("click", () => {
-//     console.log("signout clicked");
-//     signOut();
-//   });
-// }
 
 beginSpotifyPolling(accessToken, refreshToken);
 
