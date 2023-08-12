@@ -4,7 +4,7 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     login: "./src/login.js",
-    basic: "./src/player_basic.js"
+    basic: "./src/visualizer_basic.js"
   },
   output: {
     path: path.resolve(__dirname, "dist"),

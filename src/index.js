@@ -9,8 +9,8 @@ const videoSource = document.createElement("source");
 videoSource.setAttribute("type", "video/webm");
 videoSource.setAttribute("crossOrigin", "anonymous");
 videoSource.setAttribute("src", `${star_loop_uri}`);
-const videoPlayer = document.getElementById("video-player");
-videoPlayer.appendChild(videoSource);
+const videoVisualizer = document.getElementById("video-player");
+videoVisualizer.appendChild(videoSource);
 
 // check localStorage for userData
 const { accessToken, displayName } = getUserData();
@@ -21,12 +21,12 @@ if (accessToken && displayName) {
 
   // NOTE: this baseURL ends with a / because there's nothing to split on.
   const baseURL = window.location.toString();
-  const redirectTo = baseURL + "players/basic";
+  const redirectTo = baseURL + "visualizers/basic";
 
-  const playerLink = document.querySelector(".go-to-player");
-  playerLink.style.display = "block";
-  playerLink.innerHTML = `
-      <a href="${redirectTo}">Go to ${displayName}'s <span class=go-to-player__player>Player</span></a>
+  const visualizerLink = document.querySelector(".go-to-visualizer");
+  visualizerLink.style.display = "block";
+  visualizerLink.innerHTML = `
+      <a href="${redirectTo}">Go to ${displayName}'s <span class=go-to-visualizer__visualizer>Visualizer</span></a>
     `;
 
   const signOutUserElement = document.querySelector(".sign-out-user");

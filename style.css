@@ -18,7 +18,7 @@ body {
 }
 
 .new-sign-in,
-.go-to-player,
+.go-to-visualizer,
 .sign-out-user {
   /* margin: auto auto; */
   z-index: 99;
@@ -27,8 +27,8 @@ body {
 
 .new-sign-in a,
 .new-sign-in a:visited,
-.go-to-player a,
-.go-to-player a:visited,
+.go-to-visualizer a,
+.go-to-visualizer a:visited,
 .sign-out-user button {
   text-decoration: none;
   font-weight: bold;
@@ -39,7 +39,7 @@ body {
 }
 
 .new-sign-in__spotify,
-.go-to-player__player{
+.go-to-visualizer__visualizer{
   color: #1ed760;
   text-shadow: 1px 1px 5px #1e96d7;
 }
@@ -53,7 +53,7 @@ body {
 
 
 
-.video-player {
+.video-player{
   position: absolute;
   height: 100vh;
   width: 100vw;
