@@ -23,6 +23,7 @@ body {
   /* margin: auto auto; */
   z-index: 99;
   margin: 3rem;
+  display: none;
 }
 
 .new-sign-in a,
@@ -47,10 +48,7 @@ body {
 .sign-out-user button {
   border: none;
   background-color: transparent;
-
-    
 }
-
 
 
 .video-player{

@@ -15,6 +15,15 @@ videoVisualizer.appendChild(videoSource);
 // check localStorage for userData
 const { accessToken, displayName } = getUserData();
 
+if (!accessToken && !displayName) {
+  const newSignIn = document.querySelector(".new-sign-in");
+  newSignIn.style.display = "block";
+  newSignIn.innerHTML = `
+      <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
+      Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
+    `;
+}
+
 // check if they're signed in
 if (accessToken && displayName) {
   console.log(`signed in with accessToken: ${accessToken}`);
@@ -33,7 +42,7 @@ if (accessToken && displayName) {
   signOutUserElement.style.display = "block";
   signOutUserElement.innerHTML = `
       <button class="sign-out-button" id="sign-out-button">Sign Out ${displayName} from this device</button>
-  `;
+    `;
   const signOutButton = document.getElementById("sign-out-button");
   if (signOutButton) {
     signOutButton.addEventListener("click", () => {
@@ -43,4 +52,5 @@ if (accessToken && displayName) {
     });
   }
 }
+
 console.log("exiting index.js");
