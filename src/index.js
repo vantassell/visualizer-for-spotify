@@ -19,7 +19,7 @@ if (!accessToken && !displayName) {
   const newSignIn = document.querySelector(".new-sign-in");
   newSignIn.style.display = "block";
   newSignIn.innerHTML = `
-      <a href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
+      <a class="focusable" tabindex="0" href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
       Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
     `;
 }
@@ -35,13 +35,13 @@ if (accessToken && displayName) {
   const visualizerLink = document.querySelector(".go-to-visualizer");
   visualizerLink.style.display = "block";
   visualizerLink.innerHTML = `
-      <a href="${redirectTo}">Go to ${displayName}'s <span class=go-to-visualizer__visualizer>Visualizer</span></a>
+      <a class="focusable" tabindex="0" href="${redirectTo}">Go to ${displayName}'s <span class="go-to-visualizer__visualizer focusable">Visualizer</span></a>
     `;
 
   const signOutUserElement = document.querySelector(".sign-out-user");
   signOutUserElement.style.display = "block";
   signOutUserElement.innerHTML = `
-      <button class="sign-out-button" id="sign-out-button">Sign Out ${displayName} from this device</button>
+      <button class="sign-out-button focusable" id="sign-out-button" tabindex="0">Sign Out ${displayName} from this device</button>
     `;
   const signOutButton = document.getElementById("sign-out-button");
   if (signOutButton) {

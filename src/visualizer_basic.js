@@ -8,12 +8,26 @@ const { accessToken, refreshToken } = getUserData();
 
 if (!accessToken) {
   console.log("No accessToken found");
-  window.location.replace("/");
+  const baseURL = window.location.href.toString().split("/visualizers/basic")[0];
+  console.log(`baseURL: ${baseURL}`);
+
+  const redirectTo = baseURL + "/";
+  console.log(`redirecting to: ${redirectTo}`);
+
+  console.log("exiting login.js");
+  window.location.replace(redirectTo);
 }
 
 if (!refreshToken) {
   console.log("No refreshToken found");
-  window.location.replace("/");
+  const baseURL = window.location.href.toString().split("/visualizers/basic")[0];
+  console.log(`baseURL: ${baseURL}`);
+
+  const redirectTo = baseURL + "/";
+  console.log(`redirecting to: ${redirectTo}`);
+
+  console.log("exiting login.js");
+  window.location.replace(redirectTo);
 }
 
 // Add star loop video
@@ -23,7 +37,6 @@ videoSource.setAttribute("crossOrigin", "anonymous");
 videoSource.setAttribute("src", `${star_loop_uri}`);
 const videoPlayer = document.getElementById("video-player");
 videoPlayer.appendChild(videoSource);
-
 
 console.log(
   `signed into players_basic with accessToken: ${accessToken}\n and refreshToken: ${refreshToken}`,
