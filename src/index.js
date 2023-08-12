@@ -15,7 +15,7 @@ videoVisualizer.appendChild(videoSource);
 // check localStorage for userData
 const { accessToken, displayName } = getUserData();
 
-if (!accessToken && !displayName) {
+if (!accessToken) {
   const newSignIn = document.querySelector(".new-sign-in");
   newSignIn.style.display = "block";
   newSignIn.innerHTML = `
@@ -25,17 +25,16 @@ if (!accessToken && !displayName) {
 }
 
 // check if they're signed in
-if (accessToken && displayName) {
+if (accessToken) {
   console.log(`signed in with accessToken: ${accessToken}`);
 
   // NOTE: this baseURL ends with a / because there's nothing to split on.
-  const baseURL = window.location.toString();
-  const redirectTo = baseURL + "visualizers/basic";
+  const basicVisualizerURL = window.location.href.toString() + "visualizers/basic";
 
   const visualizerLink = document.querySelector(".go-to-visualizer");
   visualizerLink.style.display = "block";
   visualizerLink.innerHTML = `
-      <a class="focusable" tabindex="0" href="${redirectTo}">Go to ${displayName}'s <span class="go-to-visualizer__visualizer focusable">Visualizer</span></a>
+      <a class="focusable" tabindex="0" href="${basicVisualizerURL}">Go to ${displayName}'s <span class="go-to-visualizer__visualizer focusable">Visualizer</span></a>
     `;
 
   const signOutUserElement = document.querySelector(".sign-out-user");

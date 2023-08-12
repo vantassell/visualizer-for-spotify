@@ -6,7 +6,7 @@ export function getUserData() {
     console.log("getting userData from localStorage");
   }
 
-  const userDataString = window.sessionStorage.getItem(userDataKey);
+  const userDataString = window.localStorage.getItem(userDataKey);
 
   if (!userDataString) {
     console.log(
@@ -60,10 +60,10 @@ export function updateUserData({accessToken, refreshToken, expiresAt, email, dis
     console.log("updating localStorage userData to ", userData);
   }
 
-  window.sessionStorage.setItem(userDataKey, JSON.stringify(userData));
+  window.localStorage.setItem(userDataKey, JSON.stringify(userData));
 }
 
 export function deleteUserData() {
   console.log("deleting userData from localStorage");
-  window.sessionStorage.removeItem(userDataKey);
+  window.localStorage.removeItem(userDataKey);
 }

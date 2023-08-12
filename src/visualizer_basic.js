@@ -1,3 +1,4 @@
+import { replaceToBeforeSplitToken } from "./navigator";
 import { beginSpotifyPolling } from "./spotifyQuery";
 import { star_loop_uri } from "./star_loop";
 import { getUserData } from "./userData";
@@ -8,26 +9,14 @@ const { accessToken, refreshToken } = getUserData();
 
 if (!accessToken) {
   console.log("No accessToken found");
-  const baseURL = window.location.href.toString().split("/visualizers/basic")[0];
-  console.log(`baseURL: ${baseURL}`);
-
-  const redirectTo = baseURL + "/";
-  console.log(`redirecting to: ${redirectTo}`);
-
   console.log("exiting login.js");
-  window.location.replace(redirectTo);
+  replaceToBeforeSplitToken("/visualizers/basic");
 }
 
 if (!refreshToken) {
   console.log("No refreshToken found");
-  const baseURL = window.location.href.toString().split("/visualizers/basic")[0];
-  console.log(`baseURL: ${baseURL}`);
-
-  const redirectTo = baseURL + "/";
-  console.log(`redirecting to: ${redirectTo}`);
-
   console.log("exiting login.js");
-  window.location.replace(redirectTo);
+  replaceToBeforeSplitToken("/visualizers/basic");
 }
 
 // Add star loop video
