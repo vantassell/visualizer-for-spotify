@@ -1,5 +1,5 @@
-# What is a Spotify Visualizer? #
-Spotify-Visualizer is a website that shows what your spotify is currently playing.
+# What is a Visualizer for Spotify? #
+Visualizer-for-Spotify is a website that shows what your spotify is currently playing.
 
 _NOTE: This visualizer doesn't play sound, just video (sorry, it can't happen until spotify updates their SDK)._
 
@@ -7,7 +7,7 @@ In this repo, you'll find a webapp that communicates with an API that I also wro
 
 <br>
 
-✨ Check it out ---> [Link to Live Demo](https://vantassell.github.io/spotify-visualizer-webapp)
+✨ Check it out ---> [Link to Live Demo](https://vantassell.github.io/visualizer-for-spotify-webapp)
 
 <br>
 

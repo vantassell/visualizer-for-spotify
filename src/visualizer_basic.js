@@ -23,7 +23,8 @@ if (!refreshToken) {
 const videoSource = document.createElement("source");
 videoSource.setAttribute("type", "video/webm");
 videoSource.setAttribute("crossOrigin", "anonymous");
-videoSource.setAttribute("src", `${star_loop_uri}`);
+// videoSource.setAttribute("src", `${star_loop_uri}`);
+videoSource.setAttribute("src", "./../assets/star_loop_10x.webm");
 const videoPlayer = document.getElementById("video-player");
 videoPlayer.appendChild(videoSource);
 

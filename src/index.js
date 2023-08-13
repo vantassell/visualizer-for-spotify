@@ -8,7 +8,8 @@ console.log("starting index.js");
 const videoSource = document.createElement("source");
 videoSource.setAttribute("type", "video/webm");
 videoSource.setAttribute("crossOrigin", "anonymous");
-videoSource.setAttribute("src", `${star_loop_uri}`);
+// videoSource.setAttribute("src", `${star_loop_uri}`);
+videoSource.setAttribute("src", "./assets/star_loop_10x.webm");
 const videoVisualizer = document.getElementById("video-player");
 videoVisualizer.appendChild(videoSource);
 
