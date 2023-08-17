@@ -34,18 +34,21 @@ export async function getCurrentTrackFromSpotify() {
     console.log(`query: ${query}`);
   }
 
+  // const response = await fetch(query, {mode: "no-cors"}).catch((err) => {
   const response = await fetch(query).catch((err) => {
     console.log(`ERROR failed fetch !!!\nError: ${JSON.stringify(err)}`);
+    return { error: true, title: "Failed to fetch" };
   });
 
   if (!response) {
     console.log(`response from api was undefined`);
-    return;
+    return { error: true, title: "Failed to fetch" };
   }
+
   if (!response.ok) {
     const message = `An error occurred: ${response.statusText}`;
     console.log(`no response from server, tell AVT!\t${message}`);
-    return;
+    return { error: true, title: "Failed to fetch" };
   }
 
   const {
@@ -66,9 +69,9 @@ export async function getCurrentTrackFromSpotify() {
   }
 
   if (error) {
-    // general error, probably becuase Spotify thinks nothing is playing 
+    // general error, probably becuase Spotify thinks nothing is playing
     // (becuase the track recently changed and hasn't propogated internally throughout their API)
-    return { error }
+    return { error };
   }
 
   // check for backoff from Spotify (could be 429, or another error)
@@ -168,9 +171,7 @@ export function beginSpotifyPolling(initialAccessToken, initialsRefreshToken) {
 }
 
 async function pollSpotify({ prevSpotifyTrackLink }) {
-  if (LOGGING_LEVEL === 2) console.log("polling api");
-  console.log("accessToken", accessToken);
-  console.log("refreshTOken", refreshToken);
+  console.log("polling api");
 
   if (!continuePolling) {
     console.log("continuePolling is false");
@@ -184,15 +185,15 @@ async function pollSpotify({ prevSpotifyTrackLink }) {
     artworkURL,
     spotifyTrackLink,
     currentlyPlayingNothing,
-    error
+    error,
   } = await getCurrentTrackFromSpotify();
 
   if (currentlyPlayingNothing) {
     console.log(`\n\n\tERROR: currentlyPlayingNothing\n\n`);
   }
 
-  if(error) {
-    console.log(`\n\tERROR: ${error}\n`)
+  if (error) {
+    console.log(`\n\tERROR: ${error}\n`);
   }
 
   if (spotifyTrackLink !== prevSpotifyTrackLink && !error) {
