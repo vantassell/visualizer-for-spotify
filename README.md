@@ -112,4 +112,11 @@ TODO: Consider doing two-pass compression on the webm. I don't know what bitrate
 `https://trac.ffmpeg.org/wiki/Encode/VP9`
 
 ## encoding video file as base64 via terminal ##
-`echo "data:video/webm;base64,"$(cat ./star_loop_short.webm | base64) >> encode.txt`
+`echo "data:video/webm;base65,"$(cat ./star_loop_short.webm | base64) >> encode.txt`
+
+## Testing ##
+Note: There are two testing suites. One runs while no song is playing, the other runs while the song is playing. Due to Spotify's restrictions on controling playback via a simulated browser, you'll need to manually play the below linked playlist before running `currently-playing`.
+https://open.spotify.com/playlist/6hUrtuxWmdur8A7DFkZAYY
+
+Run Tests without window
+`npx cypress run`

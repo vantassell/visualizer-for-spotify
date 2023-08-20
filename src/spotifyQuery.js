@@ -118,9 +118,9 @@ export function updateTrackInfoTo({
 
   if (title && artist && album) {
     document.querySelector(".trackInfo").innerHTML = `
-      <p>Track: ${title}</p>
-      <p>Artist: ${artist}</p>
-      <p>Album: ${album}</p>
+      <p id="track_title">Track: ${title}</p>
+      <p id="track_artist">Artist: ${artist}</p>
+      <p id="track_album">Album: ${album}</p>
   `;
   } else {
     document.querySelector(".trackInfo").innerHTML = "";
@@ -135,7 +135,8 @@ export function updateTrackInfoTo({
   if (artworkURL) {
     document.querySelector(".artworkContainer").innerHTML = `
         <img
-           class=artwork
+           class="artwork"
+           id="track_artowrk"
            src=${artworkURL}
            alt="album art"
        />

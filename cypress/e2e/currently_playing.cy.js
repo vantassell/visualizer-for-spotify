@@ -31,16 +31,34 @@ describe("login tests", () => {
       },
     );
 
-    cy.origin("https://vantassell.github.io/visualizer-for-spotify-webapp/visualizers", () => {
-      cy.get('.trackInfo').contains("It looks like you aren't currently listening");
+    cy.origin(
+      "https://vantassell.github.io/visualizer-for-spotify-webapp/visualizers",
+      () => {
+        cy.get(".trackInfo")
+          .contains("Track: Me Porto Bonito")
+          .should("be.visible");
+        cy.get(".trackInfo")
+          .contains("Artist: Bad Bunny, Chencho Corleone")
+          .should("be.visible");
+        cy.get(".trackInfo")
+          .contains("Album: Un Verano Sin Ti")
+          .should("be.visible");
+        cy.get(".artworkContainer").should("be.visible");
+        cy.get(".artwork")
+          .should("have.attr", "src")
+          .and(
+            "equal",
+            "https://i.scdn.co/image/ab67616d0000b27349d694203245f241a1bcaa72",
+          );
+        cy.get(".spotifyLogoContainer").should("be.visible");
+        cy.get(".spotifyLogo").should("be.visible").click();
+      },
+    );
+    cy.origin("https://open.spotify.com/track/6Sq7ltF9Qa7SNFBsV5Cogx", () => {
+      cy.url().should(
+        "eq",
+        "https://open.spotify.com/track/6Sq7ltF9Qa7SNFBsV5Cogx",
+      );
     });
-
-    /*
-     * Go to Spotify and start playing something
-     */
-    // cy.visit("https://open.spotify.com/playlist/6hUrtuxWmdur8A7DFkZAYY")
-    // cy.origin("https://open.spotify.com/playlist/6hUrtuxWmdur8A7DFkZAYY",() => {
-    // cy.get('[data-testid="play-button"]').click();
-    // });
   });
 });
