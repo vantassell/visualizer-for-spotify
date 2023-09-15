@@ -12,6 +12,7 @@ videoSource.setAttribute("crossOrigin", "anonymous");
 videoSource.setAttribute("src", "./assets/star_loop_10x.webm");
 const videoVisualizer = document.getElementById("video-player");
 videoVisualizer.appendChild(videoSource);
+videoVisualizer.load();
 
 // check localStorage for userData
 const { accessToken, displayName } = getUserData();
