@@ -1,0 +1,26 @@
+// ============= TRACK AUDIO FEATURES =============
+
+// https://api.spotify.com/v1/audio-features
+
+// id: 3V5oA619wLS9MjYn3QQqhL
+
+{
+  "danceability": 0.693,
+  "energy": 0.977,
+  "key": 2,
+  "loudness": -3.912,
+  "mode": 1,
+  "speechiness": 0.228,
+  "acousticness": 0.221,
+  "instrumentalness": 0,
+  "liveness": 0.209,
+  "valence": 0.538,
+  "tempo": 100.587,
+  "type": "audio_features",
+  "id": "3V5oA619wLS9MjYn3QQqhL",
+  "uri": "spotify:track:3V5oA619wLS9MjYn3QQqhL",
+  "track_href": "https://api.spotify.com/v1/tracks/3V5oA619wLS9MjYn3QQqhL",
+  "analysis_url": "https://api.spotify.com/v1/audio-analysis/3V5oA619wLS9MjYn3QQqhL",
+  "duration_ms": 183600,
+  "time_signature": 4
+}
