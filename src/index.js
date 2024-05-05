@@ -21,7 +21,7 @@ if (!accessToken) {
   const newSignIn = document.querySelector(".new-sign-in");
   newSignIn.style.display = "block";
   newSignIn.innerHTML = `
-      <a class="focusable" tabindex="0" href="https://avt-sv-api-16ae49589f38.herokuapp.com/api/login">
+      <a class="focusable" tabindex="0" href="https://king-prawn-app-eclfh.ondigitalocean.app/api/login">
       Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
     `;
 }
