@@ -2,6 +2,7 @@ import { star_loop_uri } from "./star_loop.js";
 import { getUserData } from "./userData.js";
 import { signOutUser } from "./signOut.js";
 
+import { API_PLAYERS_URL } from "./globals.js";
 console.log("starting index.js");
 
 // Add star loop video
@@ -20,8 +21,12 @@ const { accessToken, displayName } = getUserData();
 if (!accessToken) {
   const newSignIn = document.querySelector(".new-sign-in");
   newSignIn.style.display = "block";
+  // newSignIn.innerHTML = `
+  //     <a class="focusable" tabindex="0" href="https://king-prawn-app-eclfh.ondigitalocean.app/api/login">
+  //     Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
+  //   `;
   newSignIn.innerHTML = `
-      <a class="focusable" tabindex="0" href="https://king-prawn-app-eclfh.ondigitalocean.app/api/login">
+      <a class="focusable" tabindex="0" href=${API_PLAYERS_URL}>
       Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
     `;
 }
@@ -55,7 +60,11 @@ if (accessToken) {
   }
 }
 
-// add key listeners for 4-way button on lg remote
+// ***************************************************
+// *   Warning !! Experpimentation from here out !   *
+// ***************************************************
+
+//  add key listeners for 4-way button on lg remote
 // 37: left
 // 38: up
 // 39: right
