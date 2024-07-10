@@ -2,7 +2,7 @@ import { star_loop_uri } from "./star_loop.js";
 import { getUserData } from "./userData.js";
 import { signOutUser } from "./signOut.js";
 
-import { API_PLAYERS_URL } from "./globals.js";
+import { API_LOGIN_URL, API_PLAYERS_URL } from "./globals.js";
 console.log("starting index.js");
 
 // Add star loop video
@@ -22,11 +22,10 @@ if (!accessToken) {
   const newSignIn = document.querySelector(".new-sign-in");
   newSignIn.style.display = "block";
   // newSignIn.innerHTML = `
-  //     <a class="focusable" tabindex="0" href="https://king-prawn-app-eclfh.ondigitalocean.app/api/login">
+  //     <a class="focusable" tabindex="0" href=${API_PLAYERS_URL}>
   //     Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
   //   `;
-  newSignIn.innerHTML = `
-      <a class="focusable" tabindex="0" href=${API_PLAYERS_URL}>
+  newSignIn.innerHTML = `<a class="focusable" tabindex="0" href="${API_LOGIN_URL}">
       Sign a new user into <span class="new-sign-in__spotify">Spotify</span></a>
     `;
 }
