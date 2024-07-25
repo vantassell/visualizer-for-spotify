@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SPOTIFY_CLIENT_ID } from "./../Globals.js";
+import { SPOTIFY_CLIENT_ID } from "./../globals.js";
 const router = Router();
 
 // /api/login
