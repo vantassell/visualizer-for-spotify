@@ -39,6 +39,8 @@ export async function authSpotifyRedirect(req, res) {
 
   if (query.error) {
     console.log("ERROR: Spotify had an error during sign-in on the server");
+
+    // TODO: fix this to not call WEB_APP_DOMAIN
     const clientRedirect = `${process.env.WEB_APP_DOMAIN}`;
     console.log(`redirecting to client: ${clientRedirect}`);
     res.redirect(clientRedirect);

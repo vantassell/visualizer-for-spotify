@@ -3,7 +3,7 @@ import {
   INITIAL_POLLING_INTERVAL,
   LOGGING_LEVEL,
   SPOTIFY_CLIENT_ID,
-} from "./Globals.js";
+} from "./globals.js";
 import { deleteUserData, updateUserData } from "./userData.js";
 // import { encodeFormData } from "./routes/auth.js";
 
@@ -93,7 +93,7 @@ export async function getCurrentTrackFromSpotify() {
   // 401 --> token expired
   if (spotifyRes.status === 401) {
     console.log("accessToken is expired, fetching new token...");
-    const url = new URL("http://localhost:8888/api/refresh-token");
+    const url = new URL(`${window.location.origin}/api/refresh-token`);
     url.searchParams.append("refreshToken", refreshToken);
     console.log(`url: ${url}`);
 

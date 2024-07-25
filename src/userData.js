@@ -1,4 +1,4 @@
-import { userDataKey } from "./Globals.js";
+import { userDataKey } from "./globals.js";
 const LOGGING_LEVEL = 2;
 
 export function getUserData() {
