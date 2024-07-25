@@ -105,7 +105,9 @@ export async function authSpotifyRedirect(req, res) {
 
       // redirect to client page to save tokens locally
       const clientRedirect = new URL(
-        `${req.protocol}://${req.hostname}:${process.env.PORT}/saveTokens`,
+        // TODO: fix support for https
+        // `${req.protocol}://${req.hostname}:${process.env.PORT}/saveTokens`,
+        `http://${req.hostname}/saveTokens`,
       );
 
       clientRedirect.searchParams.append("accessToken", accessToken);
