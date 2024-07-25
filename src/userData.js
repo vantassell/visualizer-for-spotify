@@ -1,5 +1,5 @@
-import { LOGGING_LEVEL } from "./globals";
-const userDataKey = "userData"
+import { userDataKey } from "./Globals.js";
+const LOGGING_LEVEL = 2;
 
 export function getUserData() {
   if (LOGGING_LEVEL === 2) {
@@ -15,7 +15,6 @@ export function getUserData() {
     return {
       accessToken: undefined,
       refreshToken: undefined,
-      expiresAt: undefined,
       email: undefined,
       displayName: undefined,
     };
@@ -23,16 +22,21 @@ export function getUserData() {
   const userData = JSON.parse(userDataString);
 
   if (LOGGING_LEVEL === 2) {
-    console.log("userData pulled from localStorage: ", userData)
+    console.log("userData pulled from localStorage: ", userData);
     console.log("returning from getUserData");
   }
 
   return userData;
 }
 
-export function updateUserData({accessToken, refreshToken, expiresAt, email, displayName }) {
+export function updateUserData({
+  accessToken,
+  refreshToken,
+  email,
+  displayName,
+}) {
   if (LOGGING_LEVEL === 2) {
-  console.log("updatingUserData");
+    console.log("updatingUserData");
   }
   const userData = getUserData();
 
@@ -42,10 +46,6 @@ export function updateUserData({accessToken, refreshToken, expiresAt, email, dis
 
   if (refreshToken) {
     userData.refreshToken = refreshToken;
-  }
-
-  if (expiresAt) {
-    userData.expiresAt = expiresAt;
   }
 
   if (email) {
@@ -66,4 +66,33 @@ export function updateUserData({accessToken, refreshToken, expiresAt, email, dis
 export function deleteUserData() {
   console.log("deleting userData from localStorage");
   window.localStorage.removeItem(userDataKey);
+}
+
+export function saveQueryParamsToUserData() {
+  console.log("starting saveQueryParamsToUserData");
+
+  const accessToken = getParamFromQuery("accessToken");
+  const refreshToken = getParamFromQuery("refreshToken");
+  const email = getParamFromQuery("email");
+  const displayName = getParamFromQuery("displayName");
+
+  const userData = { accessToken, refreshToken, email, displayName };
+
+  updateUserData(userData);
+  console.log("exiting saveQueryParamsToUserData");
+}
+
+/*
+ * returns null if no param exists for the given key
+ */
+function getParamFromQuery(paramKey) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const param = urlParams.get(paramKey);
+  if (!param) {
+    console.error(
+      "Failed to parse '${paramKey}' from params in search '${queryString}'",
+    );
+  }
+  return param;
 }

@@ -1,27 +1,16 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <!-- <title>Visualizer for Spotify Homepage</title> -->
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="visualizer.css" />
+
+    <title>Visualizer for Spotify</title>
   </head>
+
   <body>
-    <video
-      autoplay
-      muted
-      loop
-      class="video-player"
-      id="video-player"
-      crossorigin="anonymous"
-      poster="/visualizer-for-spotify-webapp/assets/star_loop_frame0.png"
-    >
-      <!-- <source src="assets/star_loop_10x.webm" type="video/webm"/> -->
-    </video>
-    <div class="new-sign-in"></div>
-
-    <div class="go-to-visualizer"></div>
-    <div class="sign-out-user"></div>
-
-    <!-- grab all of our js that we've packed into bundle.js -->
-    <script src="dist/index.bundle.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
