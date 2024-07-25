@@ -52,7 +52,9 @@ export async function authSpotifyRedirect(req, res) {
   const body = {
     grant_type: "authorization_code",
     code: req.query.code,
-    redirect_uri: `${req.protocol}://${req.hostname}:${process.env.PORT}/api/spotify-auth-redirect`,
+    // TODO fix https support
+    // redirect_uri: `${req.protocol}://${req.hostname}:${process.env.PORT}/api/spotify-auth-redirect`,
+    redirect_uri: `http://${req.hostname}/api/spotify-auth-redirect`,
     client_id: process.env.SPOTIFY_CLIENT_ID,
     client_secret: process.env.SPOTIFY_CLIENT_SECRET,
   };
