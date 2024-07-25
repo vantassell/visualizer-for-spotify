@@ -21,7 +21,9 @@ export function authLogin(req, res) {
   url.searchParams.append("show_dialog", true);
   url.searchParams.append(
     "redirect_uri",
-    `${req.protocol}://${req.hostname}:${process.env.PORT}/api/spotify-auth-redirect`,
+    // TODO: re-add https support
+    // `${req.protocol}://${req.hostname}:${process.env.PORT}/api/spotify-auth-redirect`,
+    `http://${req.hostname}/api/spotify-auth-redirect`,
   );
 
   console.log(
