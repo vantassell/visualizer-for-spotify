@@ -7,21 +7,13 @@ body,
 #root {
   height: 100vh;
   width: 100vw;
-}
-
-body,
-#root {
-  margin: 0;
-  padding: 0;
-}
-
-#root {
   min-height: 100%;
   min-width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   font-weight: bold;
   font-family: tahoma, sans-serif;
+  overflow: hidden;
 }

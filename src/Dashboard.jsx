@@ -54,8 +54,8 @@ export default function Dashboard() {
         <>
           <div className="go-to-visualizer">
             <Link to="visualizer">
-              Go to {userData.displayName}'s{" "}
-              <span className="go-to-visualizer__visualizer">Visualizer</span>
+              {userData.displayName}'s{" "}
+              <span className="go-to-visualizer__visualizer">visualizer</span>
             </Link>
           </div>
           <div className="sign-out-user">

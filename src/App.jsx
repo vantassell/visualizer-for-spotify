@@ -20,9 +20,7 @@ function App() {
       >
         <source src={starsVideoWEBM} type="video/webm" />{" "}
       </video>
-      <div id="content">
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   );
 }
