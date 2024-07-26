@@ -1,6 +1,7 @@
-import { useLoaderData } from "react-router-dom";
+import * as React from "react";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { getUserData } from "./userData.js";
-import { beginSpotifyPolling } from "./spotifyQuery.js";
+import { beginSpotifyPolling, stopPolling } from "./spotifyQuery.js";
 import "./visualizer.css";
 import spotifyLogoGreen from "./assets/spotify/Spotify_Logo_RGB_Green.png";
 
@@ -14,6 +15,7 @@ export default function Visualizer() {
   console.log(
     `signed into players_basic with accessToken: ${userData.accessToken}\n and refreshToken: ${userData.refreshToken}`,
   );
+
   beginSpotifyPolling(userData.accessToken, userData.refreshToken);
 
   return (

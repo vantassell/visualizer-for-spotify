@@ -55,8 +55,6 @@ export async function getCurrentTrackFromSpotify() {
     },
   );
 
-  console.log("spotifyRes: ", spotifyRes.status);
-
   // Recommendation: handle errors
   if (!spotifyRes) {
     console.log("bad response from Spotify");
@@ -109,72 +107,6 @@ export async function getCurrentTrackFromSpotify() {
     return {};
   }
 
-  // const body = {
-  //   client_id: SPOTIFY_CLIENT_ID,
-  //   // client_id: process.env.SPOTIFY_CLIENT_ID,
-  //   // client_secret: process.env.SPOTIFY_CLIENT_SECRET,
-  //   grant_type: "refresh_token",
-  //   refresh_token: refreshToken,
-  // };
-  //
-  // await fetch("https://accounts.spotify.com/api/token", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //     Accept: "application/json",
-  //   },
-  //   body: encodeFormData(body),
-  // })
-  //   .then((response) => response.json())
-  //   .then(async (data) => {
-  //     console.log("received from spotify refresh token");
-  //     console.log(`refreshToken data: ${JSON.stringify(data)}`);
-  //
-  //     const newAccessToken = data.access_token;
-  //     if (newAccessToken) {
-  //       console.log(
-  //         `received refreshed tokens newAccessToken: ${newAccessToken}`,
-  //       );
-  //       updateUserData({ accessToken: newAccessToken });
-  //       accessToken = newAccessToken;
-  //       // return empty object and will update on next polling
-  //       return {};
-  //     }
-  //     // data.access_token ||
-  //     // "error getting accessToken from spotify.response.data";
-  //   });
-  // }
-  // ------------------ i think delete all of this vvv
-
-  // // const response = await fetch(query, {mode: "no-cors"}).catch((err) => {
-  // const response = await fetch(query).catch((err) => {
-  //   console.log(`ERROR failed fetch !!!\nError: ${JSON.stringify(err)}`);
-  //   error = true;
-  //   title = "Failed to fetch";
-  // });
-  //
-  // if (!response) {
-  //   console.log(`response from api was undefined`);
-  //   error = true;
-  //   title = "Failed to fetch";
-  // }
-  //
-  // if (!response.ok) {
-  //   const message = `An error occurred: ${response.statusText}`;
-  //   console.log(`no response from server, tell AVT!\t${message}`);
-  //   error = true;
-  //   title = "Failed to fetch";
-  // }
-  // const title = undefined;
-  // const artist = undefined;
-  // const album = undefiend;
-  // const artworkURL = undefined;
-  // const spotifyTrackLink = undefined;
-  // const backOff = undefined;
-  // const currentlyPlayingNothing = undefined;
-  // const newAccessToken = undefined;
-  // const error = undefined;
-  console.log(`error: ${error}`);
   const data = await spotifyRes.json();
 
   if (!data || !data.item) {
@@ -184,7 +116,6 @@ export async function getCurrentTrackFromSpotify() {
     return { error };
   }
 
-  console.log(data.item);
   title = data.item.name || "";
   artist = data.item.artists.map((artist) => artist.name).join(", ") || "";
   album = data.item.album.name || "";
@@ -289,6 +220,10 @@ export function beginSpotifyPolling(initialAccessToken, initialsRefreshToken) {
 
 async function pollSpotify({ prevSpotifyTrackLink }) {
   console.log("polling api");
+  if (window.location.pathname != "/visualizer") {
+    console.log("navigated away from visualizer");
+    continuePolling = false;
+  }
 
   if (!continuePolling) {
     console.log("continuePolling is false");
@@ -330,7 +265,7 @@ async function pollSpotify({ prevSpotifyTrackLink }) {
   }, pollingInterval);
 }
 
-function stopPolling() {
+export function stopPolling() {
   if (timeoutID) {
     clearTimeout(timeoutID);
   }
