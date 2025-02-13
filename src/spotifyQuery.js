@@ -240,8 +240,10 @@ async function pollSpotify({ prevSpotifyTrackLink }) {
     error,
   } = await getCurrentTrackFromSpotify();
 
+  // getting stuck here, without having updated Album Art to office with messsage
   if (currentlyPlayingNothing) {
     console.log(`\n\n\tERROR: currentlyPlayingNothing\n\n`);
+    console.log("artworkURL: ", artworkURL);
   }
 
   if (error) {
