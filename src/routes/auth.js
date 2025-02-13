@@ -21,9 +21,7 @@ export function authLogin(req, res) {
   url.searchParams.append("show_dialog", true);
   url.searchParams.append(
     "redirect_uri",
-    // TODO: re-add https support
-    // `${req.protocol}://${req.hostname}:${process.env.PORT}/api/spotify-auth-redirect`,
-    `http://${req.hostname}/api/spotify-auth-redirect`,
+    `https://${req.hostname}/api/spotify-auth-redirect`,
   );
 
   console.log(
@@ -52,9 +50,7 @@ export async function authSpotifyRedirect(req, res) {
   const body = {
     grant_type: "authorization_code",
     code: req.query.code,
-    // TODO fix https support
-    // redirect_uri: `${req.protocol}://${req.hostname}:${process.env.PORT}/api/spotify-auth-redirect`,
-    redirect_uri: `http://${req.hostname}/api/spotify-auth-redirect`,
+    redirect_uri: `https://${req.hostname}/api/spotify-auth-redirect`,
     client_id: process.env.SPOTIFY_CLIENT_ID,
     client_secret: process.env.SPOTIFY_CLIENT_SECRET,
   };
