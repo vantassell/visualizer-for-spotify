@@ -1,8 +1,4 @@
-import {
-  codeVerifierKey,
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_REDIRECT_URI,
-} from '@/lib/constants'
+import { codeVerifierKey } from '@/lib/constants'
 import { base64encode, generateRandomString, sha256 } from '@/lib/crypto'
 import { createFileRoute } from '@tanstack/react-router'
 
@@ -30,14 +26,16 @@ function RouteComponent() {
 `
 
   const authUrl = new URL('https://accounts.spotify.com/authorize')
+  const spotifyClientID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+  const spotifyRedirectURI = import.meta.env.VITE_SPOTIFY_REDIRECT_URI
 
   const params = {
     response_type: 'code',
-    client_id: SPOTIFY_CLIENT_ID,
+    client_id: spotifyClientID,
     scope,
     code_challenge_method: 'S256',
     code_challenge: codeChallenge,
-    redirect_uri: SPOTIFY_REDIRECT_URI,
+    redirect_uri: spotifyRedirectURI,
   }
 
   authUrl.search = new URLSearchParams(params).toString()

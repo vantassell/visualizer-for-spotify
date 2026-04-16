@@ -1,4 +1,3 @@
-import { SPOTIFY_CLIENT_ID } from '#/lib/constants'
 import {
   getRefreshToken,
   removeAccessToken,
@@ -7,9 +6,7 @@ import {
   setRefreshToken,
 } from '#/lib/tokens'
 import {
-  errorMsgEvenlopeSchema,
   refreshAccessTokenErrorSchema,
-  type ErrorMsg,
   type RefreshAccessTokenError,
 } from '#/lib/types/error'
 import {
@@ -26,6 +23,7 @@ export async function refreshAccessToken() {
     throw new Error('could not find refresh token')
   }
   const baseURL = 'https://accounts.spotify.com/api/token'
+  const spotifyClientID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
 
   const payload = {
     method: 'POST',
@@ -35,7 +33,7 @@ export async function refreshAccessToken() {
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken,
-      client_id: SPOTIFY_CLIENT_ID,
+      client_id: spotifyClientID,
     }),
   }
   const res = await fetch(baseURL, payload)

@@ -1,9 +1,5 @@
 import { setAccessToken, setRefreshToken } from '#/lib/tokens'
-import {
-  codeVerifierKey,
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_REDIRECT_URI,
-} from '@/lib/constants'
+import { codeVerifierKey } from '@/lib/constants'
 import { createFileRoute, Navigate, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/login-callback')({
@@ -33,23 +29,26 @@ const getToken = async (authCode: string) => {
   }
 
   const url = 'https://accounts.spotify.com/api/token'
+  const spotifyClientID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+  const spotifyRedirectURI = import.meta.env.VITE_SPOTIFY_REDIRECT_URI
+
   const payload = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
-      client_id: SPOTIFY_CLIENT_ID,
+      client_id: spotifyClientID,
       grant_type: 'authorization_code',
       code: authCode,
-      redirect_uri: SPOTIFY_REDIRECT_URI,
+      redirect_uri: spotifyRedirectURI,
       code_verifier: codeVerifier,
     }),
   }
 
   const body = await fetch(url, payload)
   const response = await body.json()
-  console.log('response: ', response)
+  // console.log('response: ', response)
 
   if (body.status == 200) {
     setAccessToken(response.access_token)

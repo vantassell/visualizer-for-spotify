@@ -15,7 +15,7 @@ export const accountQueryOptions = {
 
 // internal function that's used in the above options
 export async function getAccount(): Promise<Account> {
-  console.log('starting account-query.getAccount() query')
+  // console.log('starting account-query.getAccount() query')
   const accessToken = getAccessToken()
   if (accessToken === null) {
     throw new Error('no Access Token found')
@@ -46,7 +46,7 @@ export async function getAccount(): Promise<Account> {
 
     if (envelope.success) {
       const errorMsg: ErrorMsg = envelope.data.error
-      console.log(`...returning from account-query.getAccount()`)
+      // console.log(`...returning from account-query.getAccount()`)
       throw new Error(
         `account-query.getAccount(): status: ${errorMsg.status} msg: ${errorMsg.message}`,
       )
@@ -63,7 +63,7 @@ export async function getAccount(): Promise<Account> {
   const envelope = accountSchema.safeParse(data)
   if (envelope.success) {
     const account: Account = envelope.data
-    console.log(`...returning from account-query.getAccount()`)
+    // console.log(`...returning from account-query.getAccount()`)
     return account
   }
 
