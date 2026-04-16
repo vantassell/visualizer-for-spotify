@@ -1,0 +1,22 @@
+info:
+  name: login-callback
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://{{host}}:{{apiPort}}/v1/login-callback?code=AQCE0uD68rXIr7aOzhXruOIhDeoYI6Uihd5iy7UHAxZ6hWEk_zrBzs0_q6b8-M0X_3MDhWZWg68efaHC_r1eAa2-UOkDOQpDSV5EJOqR753pNUzNc87HocAETUKJHn88YF76um2_uYWEZ-PKqpHLVDU6zXcMMEX7E88ZkP6ow82UE7z1RRliVE_IcWjgrEbhiI0KNVHpMr8ToFQe-6FC5PJUkaaa3dogWdbJEVWBmq5zECBjtydMDb53YzGgtJ8Z15Jkp3NpV2o2QLqDlKo4WV7kR7zbJpC-Hxpywo2X_0LiFvpE4jC_lwEGZK-N9OjMX6MEZO-nYff41LW0R7eidS6nZm3UBf9A2ID-EqH9nlkkQX95&error=test_error
+  params:
+    - name: code
+      value: AQCE0uD68rXIr7aOzhXruOIhDeoYI6Uihd5iy7UHAxZ6hWEk_zrBzs0_q6b8-M0X_3MDhWZWg68efaHC_r1eAa2-UOkDOQpDSV5EJOqR753pNUzNc87HocAETUKJHn88YF76um2_uYWEZ-PKqpHLVDU6zXcMMEX7E88ZkP6ow82UE7z1RRliVE_IcWjgrEbhiI0KNVHpMr8ToFQe-6FC5PJUkaaa3dogWdbJEVWBmq5zECBjtydMDb53YzGgtJ8Z15Jkp3NpV2o2QLqDlKo4WV7kR7zbJpC-Hxpywo2X_0LiFvpE4jC_lwEGZK-N9OjMX6MEZO-nYff41LW0R7eidS6nZm3UBf9A2ID-EqH9nlkkQX95
+      type: query
+    - name: error
+      value: test_error
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

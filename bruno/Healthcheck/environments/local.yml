@@ -1,0 +1,8 @@
+name: local
+variables:
+  - name: host
+    value: localhost
+  - name: metricsPort
+    value: "2112"
+  - name: apiPort
+    value: "8080"
