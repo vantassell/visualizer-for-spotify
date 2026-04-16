@@ -51,7 +51,7 @@ function RouteComponent() {
           <div className="track-info-container">
             {data && data.item && (
               <div className="track-info font-normal text-2xl flex flex-col gap-5 mb-3 text-white text-shadow-[-1px_1px_5px_rgb(0_0_0)]">
-                <p>Track: {data.item.name} plus some more letters to cover</p>
+                <p>Track: {data.item.name}</p>
                 <p>
                   Artist:{' '}
                   {data.item.artists.map((a: Artist) => a.name).join(', ')}
